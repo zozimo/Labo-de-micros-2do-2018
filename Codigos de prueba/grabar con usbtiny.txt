@@ -1,0 +1,3 @@
+
+Para grabar el .hex
+avrdude -c usbtiny -p $(TARGET_P) -U f:w:$(TARGET).hex
