@@ -1,28 +1,29 @@
 <ASSEMBLER_INFO>
  <VERSION>2.1.42</VERSION>
  <DEVICE>ATmega328P</DEVICE>
- <WORKING_DIR>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth</WORKING_DIR>
+ <WORKING_DIR>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m328pdef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.obj</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
-  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.hex</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.hex</FILE>
  </HEX_FILES>
  <OUTPUT_FILES>
-  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.map</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.map</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <main><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.asm</FILE><LINE>36</LINE></main>
-  <set_usart><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.asm</FILE><LINE>78</LINE></set_usart>
-  <again><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.asm</FILE><LINE>46</LINE></again>
-  <delay_500ms><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.asm</FILE><LINE>97</LINE></delay_500ms>
-  <L1><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\CodigoBluetooth\serial_prueba1.asm</FILE><LINE>101</LINE></L1>
+  <main><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</FILE><LINE>38</LINE></main>
+  <set_usart><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</FILE><LINE>91</LINE></set_usart>
+  <again><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</FILE><LINE>48</LINE></again>
+  <TRAMSTR><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</FILE><LINE>68</LINE></TRAMSTR>
+  <delay_500ms><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</FILE><LINE>110</LINE></delay_500ms>
+  <L1><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba2.asm</FILE><LINE>114</LINE></L1>
  </LABELS>
 </ASSEMBLER_INFO>
