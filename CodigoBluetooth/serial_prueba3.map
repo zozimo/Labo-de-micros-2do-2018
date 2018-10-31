@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba1.asm Wed Oct 31 13:55:55 2018
+AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_prueba3.asm Wed Oct 31 12:38:14 2018
 
 
 EQU  SIGNATURE_000 0000001e
@@ -693,9 +693,14 @@ EQU  ACIaddr      0000002e
 EQU  TWIaddr      00000030
 EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
+EQU  constL       00000067
+EQU  constH       00000000
 DEF  var1         r16
 CSEG main         00000034
-CSEG set_usart    0000004b
-CSEG again        0000003a
-CSEG delay_500ms  00000058
-CSEG L1           0000005b
+CSEG Set_ports    00000068
+CSEG set_usart    00000050
+CSEG again        0000003c
+CSEG recep        00000047
+CSEG SerialToPortC 0000004e
+CSEG delay_500ms  0000005d
+CSEG L1           00000060

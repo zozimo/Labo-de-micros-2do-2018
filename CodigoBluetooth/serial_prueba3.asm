@@ -1,5 +1,5 @@
 ;------------------------------------------------------------------------------------
-;Titulo: 			Configuracion de usart asicronico y transmision de la palabra YES  
+;Titulo: 			Configuracion de usart asicronico y Recepción de un caracter   
 ;					'Yes' continuamente.
 ;Fecha de Creación: 30/10/2018
 ;Autor: 			Cristian Z. Aranda C.
@@ -42,21 +42,15 @@ main:
 		out SPL,var1
 		ldi var1, HIGH(RAMEND)
 		out SPH,var1
-
+		
+		call Set_ports
 		call set_usart
-;Transmitimos la letra G continuamente validando que el buffer este vacio
+;Recibimos un caracteres por Usart y lo sacamos por el puerto B
+
 again:	
+		call recep			;recibo lo que haya en serial UDR0 y lo almaceno en un R17	
+		call SerialToPortC	;envio lo que recibo de la comunicación serial a portc,"aca deberia guardar en rom"
 		
-		ldi R17,'Y'
-		call TRAMSTR
-		ldi R17,'E'
-		call TRAMSTR
-		ldi R17,'S'
-		call TRAMSTR
-		ldi R17,' '		;transmito espacio
-		call TRAMSTR
-		
-		sbi ddrb,5
 		sbi portb,5
 		call delay_500ms
 		cbi portb,5
@@ -65,46 +59,62 @@ again:
 
 
 
-TRAMSTR:
-		lds r16,UCSR0A	;Cargo de I/O extendido el registro completo
-		sbrs r16,UDRE0	; siempre primero chequeo que el buffer este vacio mirando el flag UDRE0
-		rjmp TRAMSTR
-		sts UDR0, R17
-		ret
 
 
+
+
+
+
+
+
+
+
+
+
+;------------------------------------RUTINAS-----------------------------------------
+recep:
+				lds r16,UCSR0A
+				sbrs r16,RXC0	; hay algun byte en UDR para ser recibido?? osea RXC0=1
+				rjmp recep		; vuelvo a preguntar hasta que se envie algo osea UDR0=1
+				Lds r17,UDR0	; cargo el mensaje 
+				ret
+
+SerialToPortC:
+				out portc,r17
+				ret
+		
 
 
 ;------------------------------------------------------------------------------------
 ;							<<CONSIGNA>>
 ;Vamos a configurar  el usart con los siguientes paramentros:
 ;
-;Habilitar solo transmisión			(en UCSR0B-->RXEN0,TXEN0)	
+;Habilitar solo Recepción		(en UCSR0B-->RXEN0,TXEN0)	
 ;Modo Asincronico					(en UCSR0C-->UMSEL0,UMSEL1)
 ;Tamaño de caracter(frame)= 8bits	(en UCSR0C/B-->UCSZ0,UCSZ1/UCSZ2)
 ;Sin paridad						(en UCSR0C-->UMSEL0,UMSEL1)
 ;1 bit de stop 						(en UCSR0C-->USBS0)
-;Establecer un Bauderate de 1200 	(en UBRR0H/UBRR0L )
+;Establecer un Bauderate de 9600	(en UBRR0H/UBRR0L )
 ;con un micro de 16MHZ(Ver formula)
 ;------------------------------------------------------------------------------------
 
 set_usart:
 
 
-			; Habilitar transmisor
-			ldi r16, (0<<RXEN0)|(1<<TXEN0)
-			STS UCSR0B,r16; No se puede usar OUT pues UCSR0B esta en la memoria extendida.
+				; Habilitar transmisor
+				ldi r16, (1<<RXEN0)|(0<<TXEN0)
+				STS UCSR0B,r16; No se puede usar OUT pues UCSR0B esta en la memoria extendida.
 
-			;Tamaño de caracter(frame)= 8bits + 1 bit de stop
-			ldi r16, (1<<UCSZ00)|(1<<UCSZ01)|(0<<USBS0)
-			STS UCSR0C,r16
+				;Tamaño de caracter(frame)= 8bits + 1 bit de stop
+				ldi r16, (1<<UCSZ00)|(1<<UCSZ01)|(0<<USBS0)
+				STS UCSR0C,r16
 
-			;Establecer un Bauderate de 9600 con clock 16MHZ
-			ldi r16, constL
-			STS	UBRR0L,r16
-			ldi r16, constH
-			STS	UBRR0H,r16
-			ret
+				;Establecer un Bauderate de 9600 con clock 16MHZ
+				ldi r16, constL
+				STS	UBRR0L,r16
+				ldi r16, constH
+				STS	UBRR0H,r16
+				ret
 
 
 delay_500ms:
@@ -119,4 +129,14 @@ delay_500ms:
 				brne L1
 				rjmp PC+1
 				ret
+
+Set_ports:		
+				sbi ddrb,5; para el led de prueba
+
+				ldi r16,0xFF; para sacar los datos
+				out ddrc,r16
+				ret 
+
+
+
 

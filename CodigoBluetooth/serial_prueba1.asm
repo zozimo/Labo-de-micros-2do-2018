@@ -66,7 +66,7 @@ jmp main
 ;------------------------------------------------------------------------------------
 ;							<<CONSIGNA>>
 ;Vamos a configurar  el usart con los siguientes paramentros
-;Habilitar recepción y transmisión	(en UCSR0B-->RXEN0,TXEN0)	
+;Habilitar transmisión				(en UCSR0B-->RXEN0,TXEN0)	
 ;Modo Asincronico					(en UCSR0C-->UMSEL0,UMSEL1)
 ;Tamaño de caracter(frame)= 8bits	(en UCSR0C/B-->UCSZ0,UCSZ1/UCSZ2)
 ;Sin paridad						(en UCSR0C-->UMSEL0,UMSEL1)
@@ -78,8 +78,8 @@ jmp main
 set_usart:
 
 
-			; Habilitar receptor y transmisor
-			ldi r16, (1<<RXEN0)|(1<<TXEN0)
+			; Habilitar  transmisor
+			ldi r16, (0<<RXEN0)|(1<<TXEN0)
 			STS UCSR0B,r16; No se puede usar OUT pues UCSR0B esta en la memoria extendida.
 
 			;Tamaño de caracter(frame)= 8bits + 2 bit de stop
