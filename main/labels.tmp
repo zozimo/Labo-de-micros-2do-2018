@@ -1,0 +1,64 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATmega328P</DEVICE>
+ <WORKING_DIR>C:\Users\Pablo\Desktop\Proyecto POV\Codigos</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.map</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <msg><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>15</LINE></msg>
+  <main><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>62</LINE></main>
+  <testing_msg><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>29</LINE></testing_msg>
+  <DICCIONARIO><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>31</LINE></DICCIONARIO>
+  <A_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>32</LINE></A_LETTER>
+  <B_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>33</LINE></B_LETTER>
+  <C_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>34</LINE></C_LETTER>
+  <D_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>35</LINE></D_LETTER>
+  <E_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>36</LINE></E_LETTER>
+  <F_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>37</LINE></F_LETTER>
+  <G_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>38</LINE></G_LETTER>
+  <H_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>39</LINE></H_LETTER>
+  <I_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>40</LINE></I_LETTER>
+  <J_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>41</LINE></J_LETTER>
+  <K_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>42</LINE></K_LETTER>
+  <L_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>43</LINE></L_LETTER>
+  <M_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>44</LINE></M_LETTER>
+  <N_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>45</LINE></N_LETTER>
+  <O_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>46</LINE></O_LETTER>
+  <P_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>47</LINE></P_LETTER>
+  <Q_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>48</LINE></Q_LETTER>
+  <R_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>49</LINE></R_LETTER>
+  <S_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>50</LINE></S_LETTER>
+  <T_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>51</LINE></T_LETTER>
+  <U_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>52</LINE></U_LETTER>
+  <V_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>53</LINE></V_LETTER>
+  <W_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>54</LINE></W_LETTER>
+  <X_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>55</LINE></X_LETTER>
+  <Y_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>56</LINE></Y_LETTER>
+  <Z_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>57</LINE></Z_LETTER>
+  <ST_MSG_TO_RAM><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>156</LINE></ST_MSG_TO_RAM>
+  <PRINT_MSG><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>135</LINE></PRINT_MSG>
+  <end><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>184</LINE></end>
+  <PRINT_COL><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>88</LINE></PRINT_COL>
+  <PRINT_LETTER><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>105</LINE></PRINT_LETTER>
+  <DELAY_DOT_SPACE><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>180</LINE></DELAY_DOT_SPACE>
+  <PRINT_MSG_LOOP><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>140</LINE></PRINT_MSG_LOOP>
+  <PRINT_MSG_END><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>150</LINE></PRINT_MSG_END>
+  <DELAY_LETTER_SPACE><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>176</LINE></DELAY_LETTER_SPACE>
+  <ST_MSG_TO_RAM_LOOP><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>164</LINE></ST_MSG_TO_RAM_LOOP>
+  <ST_MSG_TO_RAM_END><FILE>C:\Users\Pablo\Desktop\Proyecto POV\Codigos\main.asm</FILE><LINE>171</LINE></ST_MSG_TO_RAM_END>
+ </LABELS>
+</ASSEMBLER_INFO>
