@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\serial_rx_interr.asm Mon Nov 05 14:32:21 2018
+AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\receptorBluetooth.asm Mon Nov 05 16:57:22 2018
 
 
 EQU  SIGNATURE_000 0000001e
@@ -695,11 +695,16 @@ EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
 EQU  constL       00000067
 EQU  constH       00000000
+DEF  buffer       r5
 DEF  var1         r16
 CSEG main         00000034
-CSEG URXC_INT_HANDLER 00000060
-CSEG Set_ports    0000005c
-CSEG set_usart    00000044
-CSEG again        0000003d
-CSEG delay_500ms  00000051
-CSEG L1           00000054
+CSEG URXC_INT_HANDLER 0000006a
+CSEG Set_ports    00000062
+CSEG set_usart    00000040
+CSEG prender_bluetooth 00000065
+CSEG again        0000003f
+CSEG delay_500ms  0000004d
+CSEG L1           00000050
+CSEG delay_1seg   00000058
+CSEG L2           0000005b
+CSEG salir        0000007d
