@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <AVRWorkspace><IOSettings><CurrentRegisters/></IOSettings><part name="ATMEGA328P"/><Files><File00000 Name="C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm" Position="153 67 1022 522" LineCol="30 11" State="Maximized"/></Files></AVRWorkspace>
+=======
+<AVRWorkspace><IOSettings><CurrentRegisters><PORTD><register register="DDRD" group="PORTD" display="1" locked="0"/></PORTD><PORTD><register register="PIND" group="PORTD" display="1" locked="0"/></PORTD><PORTD><register register="PORTD" group="PORTD" display="1" locked="0"/></PORTD></CurrentRegisters></IOSettings><part name="ATmega328P"/><Files><File00000 Name="C:\Users\Pablo\Desktop\Proyecto POV\main\main.asm" Position="254 99 1061 463" LineCol="195 14"/></Files></AVRWorkspace>
+>>>>>>> 6718eb33b35aa8588fe49d8cec26bd826b851081
