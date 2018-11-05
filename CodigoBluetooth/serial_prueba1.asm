@@ -52,7 +52,11 @@ again:
 		sbi ddrb,5
 		sbi portb,5
 		call delay_500ms
+		call delay_500ms
+		call delay_500ms
 		cbi portb,5
+		call delay_500ms
+		call delay_500ms
 		call delay_500ms
 		rjmp again
 
