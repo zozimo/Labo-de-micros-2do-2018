@@ -2,7 +2,7 @@ puertos utilizados:
 
 pin/puerto	
 PC6 		Reset
-portC 		0 al 3 HIGH
-portB 		0 al 3 LOW
+portD 		4 al 7 HIGH
+portC 		0 al 3 LOW
 PD0		Rx
 PD1		Tx
