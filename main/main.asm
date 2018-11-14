@@ -1,6 +1,5 @@
 ; Archivo principal
 
-
 .include"m328pdef.inc"
 .device atmega328p
 
@@ -8,6 +7,12 @@
 .def output_reg = R17 ;
 
 .equ msg_size = 54	; mensaje de 9 símbolos ascii (6 bytes cada uno)
+
+; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
+.EQU	constL=0x67		;baudaje de 9600
+.EQU	constH=0x00
+.DEF	buffer=R5				;exclusivo para enviar los datos al udreo
+;.DEF	var1=R16
 
 ;---------	Reserva de memoria en RAM	------------
 .dseg
@@ -21,12 +26,17 @@
 .ORG 0x00 ;Comienzo del código en la posición 0
 	jmp main	;
 
+;.org ICP1addr
+;	JMP ICP1_INTERRUPT
 
+.org URXCaddr	
+	jmp URXC_INT_HANDLER ; interrupcion de recepcion por Bluetooth
 
 
 .ORG INT_VECTORS_SIZE
 
 testing_msg: .db "HOLAMUNDO",0x00
+
 
 DICCIONARIO:
 	A_LETTER:	.db 0x7E,0x90,0x90,0x90,0x7E,0 ;
@@ -57,14 +67,12 @@ DICCIONARIO:
 	Z_LETTER: 	.db 0x86,0x9A,0x92,0xB2,0xC2,0 ;
 
 
-
 main:
 	;inicializa el SP
 	LDI output_reg, HIGH(RAMEND) ; Carga el SPH
 	OUT SPH, output_reg
 	LDI output_reg, LOW(RAMEND) ;Carga el SPL
 	OUT SPL, output_reg
-
 
 
 	SBI DDRC,0 ;Pone como salida el pin 0 del puerto c
@@ -76,10 +84,16 @@ main:
 	SWAP output_reg
 	OUT DDRD,output_reg	; D4...D7 como salidas
 
-	CALL ST_MSG_TO_RAM
+	CALL CONFIG_TIMER
+
+	CALL BLUETOOTH_TO_RAM
+	SEI
+
+;	CALL ST_MSG_TO_RAM
 	CALL PRINT_MSG
 
-	JMP end
+here:	JMP here
+;	JMP end
 
 ;------------------------------------------------
 ; recibe en Z la posición de la columna a imprimir
@@ -113,7 +127,6 @@ PRINT_LETTER:
 	ADD ZL, R0
 	ADC ZH, R1
 
-	
 	CALL PRINT_COL	; 1er columna
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 2da columna
@@ -123,6 +136,8 @@ PRINT_LETTER:
 	CALL PRINT_COL	; 4ta columna
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 5ta columna
+	CALL DELAY_DOT_SPACE
+	CALL PRINT_COL	; 6ta columna (columna vacia)
 	CALL DELAY_DOT_SPACE
 
 	POP R18
@@ -172,6 +187,8 @@ ST_MSG_TO_RAM:
 		POP R16
 		RET
 ;------------------------------------------------
+;	DELAYS
+;------------------------------------------------
 ;espera el tiempo correspondiente al espacio entre letras
 ; 2.9ms a 16 MHz
 DELAY_LETTER_SPACE:
@@ -198,5 +215,135 @@ DELAY_DOT_SPACE:
 ;	    nop
 	RET
 ;------------------------------------------------
-;
+;	RUTINAS DE BLUETOOTH
+;------------------------------------------------
+BLUETOOTH_TO_RAM:
+	ldi XH,HIGH(msg)
+	ldi XL,LOW(msg)
+
+	call Set_ports
+	call set_usart
+	call prender_bluetooth
+	ret
+
+;-----------------------------------------------------------
+;	CONFIGURACION DE BLUETOOTH
+;Habilitar transmision y Recepción	(en UCSR0B-->RXEN0,TXEN0)	
+;Modo Asincronico					(en UCSR0C-->UMSEL0,UMSEL1)
+;Tamaño de caracter(frame)= 8bits	(en UCSR0C/B-->UCSZ0,UCSZ1/UCSZ2)
+;Sin paridad						(en UCSR0C-->UMSEL0,UMSEL1)
+;1 bit de stop 						(en UCSR0C-->USBS0)
+;Establecer un Bauderate de 9600	(en UBRR0H/UBRR0L )
+;con un micro de 16MHZ(Ver formula)
+;-----------------------------------------------------------
+set_usart:
+;--->>> Habilitar  receptor RXEN0 y habilito la interrupcion de recepcion completa RXCIE0
+	
+	ldi r16, (1<<RXEN0)|(1<<TXEN0)|(0<<UDRIE0)|(0<<TXCIE0)|(1<<RXCIE0); agrego interrupcion de transmision completa
+	STS UCSR0B,r16; No se puede usar OUT pues UCSR0B esta en la memoria extendida.
+
+	;Tamaño de caracter(frame)= 8bits + 1 bit de stop
+	ldi r16, (1<<UCSZ00)|(1<<UCSZ01)|(0<<USBS0)
+	STS UCSR0C,r16
+
+	;Establecer un Bauderate de 9600 con clock 16MHZ
+	ldi r16, constL
+	STS	UBRR0L,r16
+	ldi r16, constH
+	STS	UBRR0H,r16
+	ret
+
+Set_ports:		
+	sbi ddrb,0		;PWR para modulo(digital pin 8)
+	sbi ddrb,5		;para el led de prueba
+	ret 
+
+prender_bluetooth:
+	in r16,portb
+	sbrc r16,0
+	ret
+	sbi portb,0
+	ret
+
+;-------------------------------
+;	RUTINAS DE TIMER
+;-------------------------------
+CONFIG_TIMER:
+	PUSH R20
+
+	CBI DDRB, 0
+	SBI DDRB, 5
+	SBI DDRB, 6
+
+	LDS R20, TIMSK1
+	ORI R20, 0x20
+	STS TIMSK1, R20 
+			
+	LDS R20, TCCR1A
+	ANDI R20, 0x0C
+	STS TCCR1A, R20 ; Set timer as normal mode
+
+	LDS R20, TCCR1B
+	ORI R20, 0x41
+	STS TCCR1B,R20 ; rising edge, no prescaler, no noise canceller
+
+	CALL MEASURE_PERIOD
+	
+	POP R20
+	RET
+
+;-------------------------------
+;	Mide el periodo de una señal rectangular dado entre dos flancos ascendentes
+;	Usar luego de CONFIG_TIMER
+;	Devuelve en R22:R23 el periodo de la señal
+
+MEASURE_PERIOD:
+
+	MEASURE_PERIOD_L1:
+		IN R21, TIFR1 ;timer interrupt
+		;When there's an interruption, ICF1 flag is set.
+		SBRS R21, ICF1 ; Skip next if ICF1 flag is set.
+		RJMP MEASURE_PERIOD_L1; loop until there's an interruption (?
+		LDS R23, ICR1L
+		LDS R24, ICR1H
+		OUT TIFR1, R21 ; clear ICF1
+		SBI PORTB, 5
+
+	MEASURE_PERIOD_L2:
+		IN R21, TIFR1
+		SBRS R21, ICF1 ; Skip next if ICF1 = 1
+		RJMP MEASURE_PERIOD_L2
+		SBI PORTB, 6
+		OUT TIFR1, R21 ; clear ICF1
+		LDS R22, ICR1L
+		SUB R22, R23; Period = Second edge - First edge
+
+		LDS R23, ICR1H
+		SBC R23, R24; R23 = R23 - R24 - C
+		CBI PORTB, 5
+
+	RET
+
+;-------------------------------
+;	INTERRUPCIONES
+;-------------------------------
+URXC_INT_HANDLER:	
+	push r16
+	push r17
+	push r18
+	push r19
+	push r20
+	lds r17,UDR0	; cargo el mensaje 
+	
+	st X+,r17; aca lo que falta es una validacion que permita reinciar la 
+			; direccion del  ram para poder volver a guardar el msj a 0x100
+	pop r20
+	pop	r19
+	pop	r18
+	pop	r17
+	pop	r16
+	reti
+
+;------------------------------
+;	END
 end: jmp end
