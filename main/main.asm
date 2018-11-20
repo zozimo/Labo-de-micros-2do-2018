@@ -74,8 +74,8 @@ main:
 	LDI output_reg, LOW(RAMEND) ;Carga el SPL
 	OUT SPL, output_reg
 
-;-----Cristian: pienso que todo los puertos deber ir inicializados en una funcion set_ports.
-	SBI DDRC,0 ;Pone como salida el pin 0 del puerto c;
+
+	SBI DDRC,0 ;Pone como salida el pin 0 del puerto c
 	NOP ;Espera un ciclo de reloj
 	SBI PORTC, 0 ;Enciende el led 0
 
