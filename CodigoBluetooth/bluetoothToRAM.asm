@@ -2,7 +2,7 @@
 ;Titulo: 			De bluetooth a memoria ram
 ;Fecha de Creación: 4/10/2018
 ;Autor: 			Cristian Z. Aranda 
-;Editado por:
+;Editado por:		Cristian Z. Aranda 20/11/2018
 ;
 ;
 ;
@@ -18,6 +18,8 @@
 .EQU	constL=0x67		;baudaje de 9600
 .EQU	constH=0x00
 .EQU msg_size = 54	; mensaje de 9 símbolos ascii (6 bytes cada uno)
+.EQU	\r=0x0D					;\r y \n, no modificar!!!!
+.EQU	\n=0x0A					;Necesarios al final de cada comando AT
 
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
 .DEF	var1=R16
@@ -52,6 +54,7 @@ msg : .byte msg_size
 main:
 
 		;Inicilizar el stack
+		
 
 		ldi var1, LOW(RAMEND)
 		out SPL,var1
@@ -177,13 +180,18 @@ URXC_INT_HANDLER:	push r16
 					push r18
 					push r19
 					push r20
+
+					;lds r17,UCSR0A 		
+					;sbrs r17,7			;salto cuando el flag se borre
+					;rjmp salir
 					lds r17,UDR0	; cargo el mensaje 
-					
+					cpi R17,'\r'	;\r para putty y \n para android
+					breq salir					
 					st X+,r17; aca lo que falta es una validacion que permita reinciar la 
 							; direccion del  ram para poder volver a guardar el msj a 0x100
 					
-					;cpi r17,'c'		; Si recibo 'c'
-					;brne salir		;salgo si no es 'c'
+					
+				;	brne salir		;salgo si no es 'c'
 					;sbi portb,5
 					;call delay_500ms
 					;call delay_1seg
@@ -194,15 +202,32 @@ URXC_INT_HANDLER:	push r16
 					pop	r18
 					pop	r17
 					pop	r16
+
 					reti
 
-;		salir:		pop r20
-;					pop	r19
-;					pop	r18
-;					pop	r17
-;					pop	r16
-;					reti
-;------------------------------------------------------------------------------------
+		salir:		call reset_RAM
+					pop r20
+					pop	r19
+					pop	r18
+					pop	r17
+					pop	r16
+					reti
+;--------------------------------------------------------------------------------------
 
-
-
+reset_RAM:
+				ldi XH,HIGH(msg)
+				ldi XL,LOW(msg)
+				sbi portb,5
+				call delay_1seg
+				call delay_1seg
+				call delay_1seg
+				call delay_1seg
+				cbi portb,5
+				ret
+				
+				
+				
+				
+				
+				
+				 

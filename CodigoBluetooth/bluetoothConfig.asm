@@ -35,7 +35,7 @@
 ;----------Comandos AT--------------
 .org 0x500
 
-	;AT:		.dB	"AT",\r,\n			;Solicitud de configuracion Comandos AT,\r y \n, Necesarios al final de cada comando AT
+
 	AT:		.dB	"AT",\r,\n	
 	ATPSWD:	.dB	"AT+PSWD=9564",\r,\n	;Modificar <1234> para cambiar el password del modulo
 	;AT:		.dB	"AT",\r,\n

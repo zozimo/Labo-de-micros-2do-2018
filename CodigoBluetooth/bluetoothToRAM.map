@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm Mon Nov 05 16:51:58 2018
+AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm Tue Nov 20 14:56:46 2018
 
 
 EQU  SIGNATURE_000 0000001e
@@ -696,6 +696,8 @@ EQU  INT_VECTORS_SIZE 00000034
 EQU  constL       00000067
 EQU  constH       00000000
 EQU  msg_size     00000036
+EQU  \r           0000000d
+EQU  \n           0000000a
 DEF  buffer       r5
 DEF  var1         r16
 DSEG msg          00000100
@@ -709,3 +711,5 @@ CSEG delay_500ms  0000004f
 CSEG L1           00000052
 CSEG delay_1seg   0000005a
 CSEG L2           0000005d
+CSEG salir        0000007c
+CSEG reset_RAM    00000084
