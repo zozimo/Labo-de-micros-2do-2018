@@ -87,9 +87,9 @@ main:
 	SWAP output_reg
 	OUT DDRD,output_reg	; D4...D7 como salidas
 
-	;CALL CONFIG_TIMER
+	CALL CONFIG_TIMER
 
-	;CALL BLUETOOTH_TO_RAM
+	CALL BLUETOOTH_TO_RAM
 	SEI
 
 	CALL ST_MSG_TO_RAM

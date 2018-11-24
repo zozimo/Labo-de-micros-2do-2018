@@ -50,6 +50,8 @@
   <X_LETTER><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>68</LINE></X_LETTER>
   <Y_LETTER><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>69</LINE></Y_LETTER>
   <Z_LETTER><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>70</LINE></Z_LETTER>
+  <CONFIG_TIMER><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>319</LINE></CONFIG_TIMER>
+  <BLUETOOTH_TO_RAM><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>268</LINE></BLUETOOTH_TO_RAM>
   <ST_MSG_TO_RAM><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>174</LINE></ST_MSG_TO_RAM>
   <here><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>96</LINE></here>
   <PRINT_MSG><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>153</LINE></PRINT_MSG>
@@ -65,11 +67,9 @@
   <DELAY_500_MS><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>230</LINE></DELAY_500_MS>
   <L1><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>238</LINE></L1>
   <DELAY_DOT_SPACE><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>255</LINE></DELAY_DOT_SPACE>
-  <BLUETOOTH_TO_RAM><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>268</LINE></BLUETOOTH_TO_RAM>
   <Set_ports><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>304</LINE></Set_ports>
   <set_usart><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>287</LINE></set_usart>
   <prender_bluetooth><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>309</LINE></prender_bluetooth>
-  <CONFIG_TIMER><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>319</LINE></CONFIG_TIMER>
   <MEASURE_PERIOD><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>361</LINE></MEASURE_PERIOD>
   <MEASURE_PERIOD_L1><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>366</LINE></MEASURE_PERIOD_L1>
   <MEASURE_PERIOD_L2><FILE>C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>376</LINE></MEASURE_PERIOD_L2>
