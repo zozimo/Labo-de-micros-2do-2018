@@ -11,7 +11,10 @@
 ; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
 .EQU	constL=0x67		;baudaje de 9600
 .EQU	constH=0x00
+.EQU	maxSpeed=0x00 ;constantes para validar la velocidad minima y maxima del 
+.EQU	minSpeed=0xF0
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
+.DEF	timeForOneGrade=R23
 ;.DEF	var1=R16
 
 ;---------	Reserva de memoria en RAM	------------
@@ -84,15 +87,15 @@ main:
 	SWAP output_reg
 	OUT DDRD,output_reg	; D4...D7 como salidas
 
-	CALL CONFIG_TIMER
+	;CALL CONFIG_TIMER
 
-	CALL BLUETOOTH_TO_RAM
+	;CALL BLUETOOTH_TO_RAM
 	SEI
 
-;	CALL ST_MSG_TO_RAM
+	CALL ST_MSG_TO_RAM
+here:
 	CALL PRINT_MSG
-
-here:	JMP here
+	JMP here
 ;	JMP end
 
 ;------------------------------------------------
@@ -128,17 +131,17 @@ PRINT_LETTER:
 	ADC ZH, R1
 
 	CALL PRINT_COL	; 1er columna
-	CALL DELAY_DOT_SPACE
+	CALL DELAY_1_GRADE
 	CALL PRINT_COL	; 2da columna
-	CALL DELAY_DOT_SPACE
+	CALL DELAY_1_GRADE
 	CALL PRINT_COL	; 3er columna
-	CALL DELAY_DOT_SPACE
+	CALL DELAY_1_GRADE
 	CALL PRINT_COL	; 4ta columna
-	CALL DELAY_DOT_SPACE
+	CALL DELAY_1_GRADE
 	CALL PRINT_COL	; 5ta columna
-	CALL DELAY_DOT_SPACE
+	CALL DELAY_1_GRADE
 	CALL PRINT_COL	; 6ta columna (columna vacia)
-	CALL DELAY_DOT_SPACE
+	CALL DELAY_1_GRADE
 
 	POP R18
 	POP input_reg
@@ -157,7 +160,7 @@ PRINT_MSG:
 		BREQ PRINT_MSG_END
 		LD input_reg, X+	; leer letra de RAM
 		CALL PRINT_LETTER	; imprimir letra
-		CALL DELAY_LETTER_SPACE	; esperar letter_space
+		;CALL DELAY_3_MS	; esperar letter_space
 		SUBI R19,6		; decrementar contador en 6
 		JMP PRINT_MSG_LOOP
 
@@ -189,18 +192,63 @@ ST_MSG_TO_RAM:
 ;------------------------------------------------
 ;	DELAYS
 ;------------------------------------------------
+;Delay de 1 grado que va a ser utilizado para generar delays de cierta cantidad de grados
+DELAY_1_GRADE:
+		PUSH R20
+
+		IN R20, TIFR0
+		SBRS R20, TOV0 ; saltar sigueinte instruccion si T0V0 flag está seteado
+		RJMP DELAY_1_GRADE
+		LDS R20, TCCR0B
+		ANDI R20, 0x30 ; stop timer
+		STS TCCR1B,R20
+		LDI R20, (1<<TOV0)
+		OUT TIFR0, R20 ; clear T0V0 flag escribiendo 1 en TIFR
+
+		POP R20
+	RET
+;--------------------------------------------------
 ;espera el tiempo correspondiente al espacio entre letras
 ; 2.9ms a 16 MHz
-DELAY_LETTER_SPACE:
-;	    ldi  r22, 63
-;	    ldi  r23, 83
-;	LOOP_LETTER_SPACE: 
-;		dec  r23
-;	    brne LOOP_LETTER_SPACE
-;	    dec  r22
-;	    brne LOOP_LETTER_SPACE
+DELAY_3_MS:
+		push r22
+		push R24
 
+	    ldi  r22, 63
+	    ldi  R24, 83
+	LOOP_LETTER_SPACE: 
+		dec  R24
+	    brne LOOP_LETTER_SPACE
+	    dec  r22
+	    brne LOOP_LETTER_SPACE
+	
+		pop R24
+		pop r22
+		
 	RET
+;-------------------------------------------------
+DELAY_500_MS:
+		push r18
+		push r19
+		push r20
+
+		ldi  r18, 41
+	    ldi  r19, 150
+	    ldi  r20, 128
+	L1: dec  r20
+	    brne L1
+	    dec  r19
+	    brne L1
+	    dec  r18
+	    brne L1
+
+		pop r20
+		pop r19
+		pop r18
+
+		
+
+		ret
 ;------------------------------------------------
 ;espera el tiempo correspondiente al espacio entre columnas de una letra
 ; 599,5 us a 16 MHz
@@ -270,10 +318,9 @@ prender_bluetooth:
 ;-------------------------------
 CONFIG_TIMER:
 	PUSH R20
+	PUSH R24
 
 	CBI DDRB, 0
-	SBI DDRB, 5
-	SBI DDRB, 6
 
 	LDS R20, TIMSK1
 	ORI R20, 0x20
@@ -289,7 +336,21 @@ CONFIG_TIMER:
 
 	CALL MEASURE_PERIOD
 	
+	;config timer para el delay de 1 grado
+	LDI R24, 0xFF 
+	SUB R24, timeForOneGrade ;timeForOneGrade contiene el valor alto del tiempo del periodo. Este representaría el tiempo de un grado. Fue calculado en MEASURE_PERIOD
+	OUT TCNT0, R24
+	LDI R20, 0x01
+		
+	LDI R20, 0x00
+	OUT TCCR0A, R20
+
+	LDI R20, 0x01
+	OUT TCCR0B, R20
+	
+	POP R24
 	POP R20
+	
 	RET
 
 ;-------------------------------
@@ -298,16 +359,19 @@ CONFIG_TIMER:
 ;	Devuelve en R22:R23 el periodo de la señal
 
 MEASURE_PERIOD:
+	PUSH R21
+	PUSH R22
+	PUSH R24
 
 	MEASURE_PERIOD_L1:
 		IN R21, TIFR1 ;timer interrupt
 		;When there's an interruption, ICF1 flag is set.
 		SBRS R21, ICF1 ; Skip next if ICF1 flag is set.
 		RJMP MEASURE_PERIOD_L1; loop until there's an interruption (?
-		LDS R23, ICR1L
+		LDS timeForOneGrade, ICR1L
 		LDS R24, ICR1H
 		OUT TIFR1, R21 ; clear ICF1
-		SBI PORTB, 5
+		;SBI PORTB, 5  ;Solo para pruebas
 
 	MEASURE_PERIOD_L2:
 		IN R21, TIFR1
@@ -316,13 +380,35 @@ MEASURE_PERIOD:
 		SBI PORTB, 6
 		OUT TIFR1, R21 ; clear ICF1
 		LDS R22, ICR1L
-		SUB R22, R23; Period = Second edge - First edge
+		SUB R22, timeForOneGrade; Period = Second edge - First edge
 
-		LDS R23, ICR1H
-		SBC R23, R24; R23 = R23 - R24 - C
-		CBI PORTB, 5
+		LDS timeForOneGrade, ICR1H
+		SBC timeForOneGrade, R24; R23 = R23 - R24 - C
+		;CBI PORTB, 5 ;Solo para pruebas
+	CALL SET_TIME_PER_GRADE
+	
+	POP R21
+	POP R22
+	POP R24
+	RET
+
+;---------------------------------------------------
+SET_TIME_PER_GRADE:
+	CPI timeForOneGrade, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
+	BREQ MEASURE_PERIOD
+	SBI PORTD, 7
+
+	CPI timeForOneGrade, minSpeed
+	BRSH MEASURE_PERIOD
+	SBI PORTC, 0
+
+
+	CALL DELAY_500_MS ; delay para hacer visible los LEDs
+	CBI PORTD, 7
+	CBI PORTC, 0
 
 	RET
+	
 
 ;-------------------------------
 ;	INTERRUPCIONES
