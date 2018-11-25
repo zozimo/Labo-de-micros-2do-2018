@@ -42,7 +42,7 @@
 	ATROLE:	.dB	"AT+ROLE=",role,\r,\n	;Modificar <role>  en la Parte de EQU=, para cambiar el nombre rol del bluetooth
 	;AT:		.dB	"AT",\r,\n
 	ATUART:	.dB	"AT+UART=9600",stop,parity,\r,\n	;Modificar stop y parity en EQU, Cambiar <9600> para el baurate									
-	ATNAME:	.dB	"AT+NAME=cris",\r,\n,0xFF	;Modificar <prueba> para cambiar el nombre del bluetooth
+	ATNAME:	.dB	"AT+NAME=Display POV",\r,\n,0xFF	;Modificar <prueba> para cambiar el nombre del bluetooth
 
 
 
@@ -166,7 +166,7 @@ delay_1seg:
     			brne L2
 				ret	
 
-Set_ports:		sbi ddrb,0		;PWR para modulo(digital pin 8)
+Set_ports:		sbi ddrd,2		;PWR para modulo(digital pin 8)
 				;cbi portb,0
 				sbi ddrb,5		;para el led de prueba
 				;ldi r16,0xFF
@@ -245,9 +245,9 @@ UDRE_INT_HANDLER:
 
 prender_bluetooth:
 				
-				in r16,portb
+				in r16,portd
 				sbrc r16,0
 				ret
-				sbi portb,0
+				sbi portd,2
 				ret
 

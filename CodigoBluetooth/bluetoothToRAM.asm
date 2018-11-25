@@ -163,11 +163,12 @@ Set_ports:		sbi ddrb,0		;PWR para modulo(digital pin 8)
 				ret 
 
 prender_bluetooth:
-				
-				in r16,portb
+				push r16
+				in r16,portd
 				sbrc r16,0
 				ret
-				sbi portb,0
+				sbi portd,2
+				pop r16
 				ret
 ;------------------------------------------------------------------------------------
 
