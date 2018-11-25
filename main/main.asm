@@ -6,7 +6,7 @@
 .def input_reg = R16 ;
 .def output_reg = R17 ;
 
-.equ msg_size = 54	; mensaje de 9 símbolos ascii (6 bytes cada uno)
+.equ msg_size = 24	; mensaje de 9 símbolos ascii (6 bytes cada uno)
 
 ; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
 .EQU	constL=0x67		;baudaje de 9600
@@ -38,7 +38,7 @@
 
 .ORG INT_VECTORS_SIZE
 
-testing_msg: .db "HOLAMUNDO",0x00
+testing_msg: .db "HOLA";,0x00
 
 
 DICCIONARIO:
@@ -78,9 +78,9 @@ main:
 	OUT SPL, output_reg
 
 
-	SBI DDRC,0 ;Pone como salida el pin 0 del puerto c
-	NOP ;Espera un ciclo de reloj
-	SBI PORTC, 0 ;Enciende el led 0
+	;SBI DDRC,0 ;Pone como salida el pin 0 del puerto c
+	;NOP ;Espera un ciclo de reloj
+	;SBI PORTC, 0 ;Enciende el led 0
 
 	LDI output_reg, 0x0F
 	OUT DDRC,output_reg	; C0...C3 como salidas
@@ -89,12 +89,14 @@ main:
 
 	CALL CONFIG_TIMER
 
-	CALL BLUETOOTH_TO_RAM
-	SEI
+	;CALL BLUETOOTH_TO_RAM
+	;SEI
 
 	CALL ST_MSG_TO_RAM
 here:
+call delay_45_grades
 	CALL PRINT_MSG
+	
 	JMP here
 ;	JMP end
 
@@ -131,17 +133,17 @@ PRINT_LETTER:
 	ADC ZH, R1
 
 	CALL PRINT_COL	; 1er columna
-	CALL DELAY_1_GRADE
+	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 2da columna
-	CALL DELAY_1_GRADE
+	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 3er columna
-	CALL DELAY_1_GRADE
+	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 4ta columna
-	CALL DELAY_1_GRADE
+	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 5ta columna
-	CALL DELAY_1_GRADE
+	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 6ta columna (columna vacia)
-	CALL DELAY_1_GRADE
+	CALL DELAY_DOT_SPACE
 
 	POP R18
 	POP input_reg
@@ -253,15 +255,26 @@ DELAY_500_MS:
 ;espera el tiempo correspondiente al espacio entre columnas de una letra
 ; 599,5 us a 16 MHz
 DELAY_DOT_SPACE:
-;	    ldi  r22, 13
-;	    ldi  r23, 116
-;	LOOP_DOT_SPACE:
-;		dec  r23
-;	    brne LOOP_DOT_SPACE
-;	    dec  r22
-;	    brne LOOP_DOT_SPACE
-;	    nop
+	    ldi  r22, 13
+	    ldi  r23, 116
+	LOOP_DOT_SPACE:
+		dec  r23
+	    brne LOOP_DOT_SPACE
+	    dec  r22
+	    brne LOOP_DOT_SPACE
+	    nop
 	RET
+
+;------------------------------------------------
+delay_45_grades:
+	ldi R20, 45
+	loop:
+		DEC R20
+		call DELAY_DOT_SPACE
+		CPI R20, 0
+		BRNE LOOP
+
+	ret
 ;------------------------------------------------
 ;	RUTINAS DE BLUETOOTH
 ;------------------------------------------------
@@ -364,6 +377,7 @@ MEASURE_PERIOD:
 	PUSH R24
 
 	MEASURE_PERIOD_L1:
+	
 		IN R21, TIFR1 ;timer interrupt
 		;When there's an interruption, ICF1 flag is set.
 		SBRS R21, ICF1 ; Skip next if ICF1 flag is set.
@@ -398,7 +412,8 @@ SET_TIME_PER_GRADE:
 	BREQ MEASURE_PERIOD
 	SBI PORTD, 7
 
-	CPI timeForOneGrade, minSpeed
+	LDI R20, minSpeed
+	CP R20, timeForOneGrade
 	BRSH MEASURE_PERIOD
 	SBI PORTC, 0
 
