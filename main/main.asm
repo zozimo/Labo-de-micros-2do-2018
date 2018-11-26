@@ -12,14 +12,9 @@
 .EQU	constL=0x67		;baudaje de 9600
 .EQU	constH=0x00
 .EQU	maxSpeed=0x00 ;constantes para validar la velocidad minima y maxima del 
-<<<<<<< HEAD
 .EQU	minSpeed=0xF0
 .EQU	\r=0x0D					;\r y \n, no modificar!!!!
 .EQU	\n=0x0A					
-
-=======
-.EQU	minSpeed=0xF0
->>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
 .DEF	timeForOneGrade=R23
 ;.DEF	var1=R16
@@ -134,13 +129,9 @@ main:
 
 	CALL ST_MSG_TO_RAM
 here:
-<<<<<<< HEAD
 	CALL PRINT_MSG
-=======
-call delay_45_grades
+	call delay_45_grades
 	CALL PRINT_MSG
-	
->>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
 	JMP here
 ;	JMP end
 
@@ -461,13 +452,9 @@ SET_TIME_PER_GRADE:
 	CPI timeForOneGrade, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
 	BREQ MEASURE_PERIOD
 	SBI PORTD, 7
-
-<<<<<<< HEAD
 	CPI timeForOneGrade, minSpeed
-=======
 	LDI R20, minSpeed
 	CP R20, timeForOneGrade
->>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
 	BRSH MEASURE_PERIOD
 	SBI PORTC, 0
 
