@@ -6,7 +6,7 @@
 .def input_reg = R16 ;
 .def output_reg = R17 ;
 
-.equ msg_size = 24	; mensaje de 9 símbolos ascii (6 bytes cada uno)
+.equ msg_size = 60	; mensaje de 10 símbolos ascii (6 bytes cada uno)
 
 ; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
 .EQU	constL=0x67		;baudaje de 9600
@@ -17,7 +17,6 @@
 .EQU	\n=0x0A					
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
 .DEF	timeForOneGrade=R23
-;.DEF	var1=R16
 
 ;---------	Reserva de memoria en RAM	------------
 .dseg
@@ -40,7 +39,7 @@
 
 .ORG INT_VECTORS_SIZE
 
-testing_msg: .db "HOLA";,0x00
+testing_msg: .db "HOLA MUNDO";,0x00
 
 
 DICCIONARIO:
@@ -112,11 +111,6 @@ main:
 	LDI output_reg, LOW(RAMEND) ;Carga el SPL
 	OUT SPL, output_reg
 
-
-	;SBI DDRC,0 ;Pone como salida el pin 0 del puerto c
-	;NOP ;Espera un ciclo de reloj
-	;SBI PORTC, 0 ;Enciende el led 0
-
 	LDI output_reg, 0x0F
 	OUT DDRC,output_reg	; C0...C3 como salidas
 	SWAP output_reg
@@ -124,14 +118,14 @@ main:
 
 	CALL CONFIG_TIMER
 
-	;CALL BLUETOOTH_TO_RAM
-	;SEI
+	CALL BLUETOOTH_TO_RAM
+	SEI ; interrupcion habilitada para recibir mensaje en RAM
 
 	CALL ST_MSG_TO_RAM
 here:
 	CALL PRINT_MSG
 	call delay_45_grades
-	CALL PRINT_MSG
+;	CALL PRINT_MSG
 	JMP here
 ;	JMP end
 
@@ -154,7 +148,7 @@ PRINT_COL:
 ;recibe en el registro de entrada una letra en ascii
 ;utiliza puntero z como intermedio
 ;input_reg esta usado como ascii
-;posición de la letra = DICCIONARIO + (input_reg -'A')*5
+;posición de la letra = DICCIONARIO + (input_reg -' ')*6
 PRINT_LETTER:
 	PUSH input_reg
 	PUSH R18
@@ -188,22 +182,18 @@ PRINT_LETTER:
 ;lee de RAM una frase e imprime letra por letra
 ;usa input_reg para cada letra individual
 PRINT_MSG:
-	PUSH R19
-	LDI R19, msg_size	; variable de contador en el mensaje
 	LDI XH, HIGH(msg)	; variable para desplazarse en el mensaje en RAM
 	LDI XL, LOW(msg)
 	PRINT_MSG_LOOP:
-		CPI R19,0
-		BREQ PRINT_MSG_END
 		LD input_reg, X+	; leer letra de RAM
+		CPI input_reg,0x00
+		BREQ PRINT_MSG_END
 		CALL PRINT_LETTER	; imprimir letra
 		;CALL DELAY_3_MS	; esperar letter_space
-		SUBI R19,6		; decrementar contador en 6
 		JMP PRINT_MSG_LOOP
 
 
 	PRINT_MSG_END:
-		POP R19
 		RET
 
 ;------------------------------------------------
@@ -247,22 +237,22 @@ DELAY_1_GRADE:
 ;--------------------------------------------------
 ;espera el tiempo correspondiente al espacio entre letras
 ; 2.9ms a 16 MHz
-DELAY_3_MS:
-		push r22
-		push R24
+;DELAY_3_MS:
+;		push r22
+;		push R24
 
-	    ldi  r22, 63
-	    ldi  R24, 83
-	LOOP_LETTER_SPACE: 
-		dec  R24
-	    brne LOOP_LETTER_SPACE
-	    dec  r22
-	    brne LOOP_LETTER_SPACE
+;	    ldi  r22, 63
+;	    ldi  R24, 83
+;	LOOP_LETTER_SPACE: 
+;		dec  R24
+;	    brne LOOP_LETTER_SPACE
+;	    dec  r22
+;	    brne LOOP_LETTER_SPACE
 	
-		pop R24
-		pop r22
+;		pop R24
+;		pop r22
 		
-	RET
+;	RET
 ;-------------------------------------------------
 DELAY_500_MS:
 		push r18
@@ -281,9 +271,7 @@ DELAY_500_MS:
 
 		pop r20
 		pop r19
-		pop r18
-
-		
+		pop r18	
 
 		ret
 ;------------------------------------------------
@@ -478,9 +466,9 @@ URXC_INT_HANDLER:
 
 	lds r17,UDR0	; cargo el mensaje 
 	cpi R17,'\r'	;\r para putty y \n para android
-	breq salir					
+	breq END_BLUETOOTH_MSG					
 	st X+,r17; aca lo que falta es una validacion que permita reinciar la 
-							; direccion del  ram para poder volver a guardar el msj a 0x100
+			; direccion del  ram para poder volver a guardar el msj a 0x100
 	pop r20
 	pop	r19
 	pop	r18
@@ -488,7 +476,7 @@ URXC_INT_HANDLER:
 	pop	r16
 	reti
 
-salir:		
+END_BLUETOOTH_MSG:		
 	call reset_RAM
 	pop r20
 	pop	r19
