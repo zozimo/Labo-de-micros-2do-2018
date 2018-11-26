@@ -6,16 +6,20 @@
 .def input_reg = R16 ;
 .def output_reg = R17 ;
 
-.equ msg_size = 54	; mensaje de 9 símbolos ascii (6 bytes cada uno)
+.equ msg_size = 24	; mensaje de 9 símbolos ascii (6 bytes cada uno)
 
 ; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
 .EQU	constL=0x67		;baudaje de 9600
 .EQU	constH=0x00
 .EQU	maxSpeed=0x00 ;constantes para validar la velocidad minima y maxima del 
+<<<<<<< HEAD
 .EQU	minSpeed=0xF0
 .EQU	\r=0x0D					;\r y \n, no modificar!!!!
 .EQU	\n=0x0A					
 
+=======
+.EQU	minSpeed=0xF0
+>>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
 .DEF	timeForOneGrade=R23
 ;.DEF	var1=R16
@@ -41,10 +45,43 @@
 
 .ORG INT_VECTORS_SIZE
 
-testing_msg: .db "HOLAMUNDO",0x00
+testing_msg: .db "HOLA";,0x00
 
 
 DICCIONARIO:
+	SPACE_MK:	.db 0x00,0x00,0x00,0x00,0x00,0 ;
+	EXCL_MK:	.db 0x00,0x00,0xFA,0x00,0x00,0 ;
+	DTILE_MK:	.db 0x00,0x00,0xC0,0xC0,0x00,0 ;
+	NUMERAL_MK:	.db 0x00,0x00,0x00,0x00,0x00,0 ;
+	DOLLAR_MK:	.db 0x24,0x52,0xFE,0x52,0x4C,0 ;
+	PERCENT_MK:	.db 0x02,0x4C,0x10,0x64,0x80,0 ;
+	AMPER_MK:	.db 0x6C,0x92,0x92,0x6C,0x12,0 ;
+	TILE_MK:	.db 0x00,0x00,0xC0,0x00,0x00,0 ;
+	LPAR_MK:	.db 0x00,0x7E,0x82,0x00,0x00,0 ;
+	RPAR_MK:	.db 0x00,0x00,0x82,0x7E,0x00,0 ;
+	STAR_MK:	.db 0x14,0x18,0x70,0x18,0x14,0 ;
+	PLUS_MK:	.db 0x00,0x10,0x38,0x10,0x00,0 ;
+	COMA_MK:	.db 0x00,0x00,0x06,0x00,0x00,0 ;
+	DASH_MK:	.db 0x00,0x10,0x10,0x10,0x00,0 ;
+	SDOT_MK:	.db 0x00,0x00,0x02,0x00,0x00,0 ;
+	SLASH_MK:	.db 0x02,0x02,0x10,0x60,0x80,0 ;
+	CERO_NUM:	.db 0x7C,0x86,0x92,0xC2,0x7C,0 ;
+	ONE_NUM:	.db 0x20,0x40,0xFE,0x00,0x00,0 ;
+	TWO_NUM:	.db 0x62,0x86,0x8A,0x92,0x62,0 ;
+	THREE_NUM:	.db 0x44,0x82,0x92,0x92,0x6C,0 ;
+	FOUR_NUM:	.db 0xF0,0x10,0x10,0xFE,0x10,0 ;
+	FIVE_NUM:	.db 0xE4,0xA2,0xA2,0xA2,0x9C,0 ;
+	SIX_NUM:	.db 0x3C,0x52,0x92,0x12,0x0C,0 ;
+	SEVEN_NUM:	.db 0x80,0x90,0x9C,0xB0,0xC0,0 ;
+	EIGHT_NUM:	.db 0x6C,0x92,0x92,0x92,0x6C,0 ;
+	NINE_NUM:	.db 0x60,0x90,0x90,0x90,0x7E,0 ;
+	DDOT_MK:	.db 0x00,0x00,0x12,0x00,0x00,0 ;
+	DOTCOMA_MK:	.db 0x00,0x00,0x16,0x00,0x00,0 ;
+	MINOR_MK:	.db 0x10,0x28,0x44,0x82,0x00,0 ;
+	EQUAL_MK:	.db 0x00,0x12,0x12,0x12,0x00,0 ;
+	GREATER_MK:	.db 0x00,0x82,0x44,0x28,0x10,0 ;
+	ASK_MK:		.db 0x60,0x80,0x9A,0x90,0x60,0 ;
+	AT_MK:		.db 0x3C,0x42,0x5C,0x54,0x3C,0 ;
 	A_LETTER:	.db 0x7E,0x90,0x90,0x90,0x7E,0 ;
 	B_LETTER: 	.db 0xFE,0x92,0x92,0xF2,0x0E,0 ;
 	C_LETTER:	.db 0xFE,0x82,0x82,0x82,0x82,0 ;
@@ -97,7 +134,13 @@ main:
 
 	CALL ST_MSG_TO_RAM
 here:
+<<<<<<< HEAD
 	CALL PRINT_MSG
+=======
+call delay_45_grades
+	CALL PRINT_MSG
+	
+>>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
 	JMP here
 ;	JMP end
 
@@ -128,7 +171,7 @@ PRINT_LETTER:
 	LDI ZL,LOW(DICCIONARIO<<1)
 	LDI R18,6
 
-	SUBI input_reg,'A' 
+	SUBI input_reg,' ' 
 	MUL R18,input_reg	;r0 <- low(r18*r16)		r1 <- high(r18*r16)
 	ADD ZL, R0
 	ADC ZH, R1
@@ -256,15 +299,26 @@ DELAY_500_MS:
 ;espera el tiempo correspondiente al espacio entre columnas de una letra
 ; 599,5 us a 16 MHz
 DELAY_DOT_SPACE:
-;	    ldi  r22, 13
-;	    ldi  r23, 116
-;	LOOP_DOT_SPACE:
-;		dec  r23
-;	    brne LOOP_DOT_SPACE
-;	    dec  r22
-;	    brne LOOP_DOT_SPACE
-;	    nop
+	    ldi  r22, 13
+	    ldi  r23, 116
+	LOOP_DOT_SPACE:
+		dec  r23
+	    brne LOOP_DOT_SPACE
+	    dec  r22
+	    brne LOOP_DOT_SPACE
+	    nop
 	RET
+
+;------------------------------------------------
+delay_45_grades:
+	ldi R20, 45
+	loop:
+		DEC R20
+		call DELAY_DOT_SPACE
+		CPI R20, 0
+		BRNE LOOP
+
+	ret
 ;------------------------------------------------
 ;	RUTINAS DE BLUETOOTH
 ;------------------------------------------------
@@ -373,6 +427,7 @@ MEASURE_PERIOD:
 	PUSH R24
 
 	MEASURE_PERIOD_L1:
+	
 		IN R21, TIFR1 ;timer interrupt
 		;When there's an interruption, ICF1 flag is set.
 		SBRS R21, ICF1 ; Skip next if ICF1 flag is set.
@@ -407,7 +462,12 @@ SET_TIME_PER_GRADE:
 	BREQ MEASURE_PERIOD
 	SBI PORTD, 7
 
+<<<<<<< HEAD
 	CPI timeForOneGrade, minSpeed
+=======
+	LDI R20, minSpeed
+	CP R20, timeForOneGrade
+>>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
 	BRSH MEASURE_PERIOD
 	SBI PORTC, 0
 

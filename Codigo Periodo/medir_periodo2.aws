@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <AVRWorkspace><IOSettings><CurrentRegisters/></IOSettings><part name="ATMEGA328P"/><Files><File00000 Name="C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\Codigo Periodo\medir_periodo2.asm" Position="153 67 973 522" LineCol="44 0" State="Maximized"/></Files></AVRWorkspace>
+=======
+<AVRWorkspace><IOSettings><CurrentRegisters/></IOSettings><part name="ATMEGA328P"/><Files><File00000 Name="C:\Users\jesus\OneDrive\Documentos\GitHub\Labo-de-micros-2do-2018\Codigo Periodo\medir_periodo2.asm" Position="134 67 1504 613" LineCol="115 1" State="Maximized"/></Files></AVRWorkspace>
+>>>>>>> 9fc30413fa7d7538f4277c81ed2f3104bd8cb275
