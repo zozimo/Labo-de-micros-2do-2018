@@ -477,11 +477,10 @@ URXC_INT_HANDLER:
 	push r19
 	push r20
 
-	lds r17,UDR0	; cargo el mensaje 
-	cpi R17,'\n'	;\r para putty y \n para android
-	breq END_BLUETOOTH_MSG					
-	st Y+,r17; aca lo que falta es una validacion que permita reinciar la 
-			; direccion del  ram para poder volver a guardar el msj a 0x100
+	lds r17,UDR0			; cargo el mensaje 
+	cpi R17,'\n'			;\r para putty y \n para android
+	breq END_BLUETOOTH_MSG	;Si es \n guardo y salgo			
+	st Y+,r17
 	pop r20
 	pop	r19
 	pop	r18
@@ -489,7 +488,8 @@ URXC_INT_HANDLER:
 	pop	r16
 	reti
 
-	END_BLUETOOTH_MSG:		
+	END_BLUETOOTH_MSG:
+		st Y+,r17		;guardo el \n para que pablo valide con este
 		call reset_RAM
 		pop r20
 		pop	r19

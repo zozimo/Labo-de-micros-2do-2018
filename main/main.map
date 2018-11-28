@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm Wed Nov 28 09:59:39 2018
+AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm Wed Nov 28 10:37:27 2018
 
 
 EQU  SIGNATURE_000 0000001e
@@ -796,4 +796,4 @@ CSEG MEASURE_PERIOD_L1 000001b9
 CSEG MEASURE_PERIOD_L2 000001c1
 CSEG SET_TIME_PER_GRADE 000001d2
 CSEG END_BLUETOOTH_MSG 000001ee
-CSEG end          000001f6
+CSEG end          000001f7
