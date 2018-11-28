@@ -408,14 +408,15 @@ MEASURE_PERIOD:
 
 ;---------------------------------------------------
 SET_TIME_PER_GRADE:
+	SBI PORTD, 7
 	CPI timeForOneGrade, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
 	BREQ MEASURE_PERIOD
-	SBI PORTD, 7
 
+	SBI PORTC, 0
 	LDI R20, minSpeed
 	CP R20, timeForOneGrade
 	BRSH MEASURE_PERIOD
-	SBI PORTC, 0
+
 
 
 	CALL DELAY_500_MS ; delay para hacer visible los LEDs
