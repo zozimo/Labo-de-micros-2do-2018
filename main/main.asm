@@ -86,7 +86,7 @@ DICCIONARIO:
 	Y_LETTER: 	.db 0x80,0x40,0x3E,0x40,0x80,0 ;
 	Z_LETTER: 	.db 0x86,0x9A,0x92,0xB2,0xC2,0 ;
 
-testing_msg: .db "HOLA",\n,0
+testing_msg: .db "COMOESTAS",\n,0
 ;---------	Configuración de interrupciones	---------
 
 .ORG 0x00 ;Comienzo del código en la posición 0
@@ -363,15 +363,15 @@ set_usart:
 	ret
 
 Set_ports:		
-	sbi ddrd,2		;PWR para modulo(digital pin 8)
+	sbi ddrb,4		;PWR para modulo(digital pin 8)
 ;	sbi ddrb,5		;para el led de prueba
 	ret 
 
 prender_bluetooth:
-	in r16,portd
-	sbrc r16,0
+	in r16,portb
+	sbrc r16,4
 	ret
-	sbi portd,2
+	sbi portb,4
 	ret
 
 reset_RAM:
@@ -490,7 +490,7 @@ URXC_INT_HANDLER:
 	push r20
 
 	lds r17,UDR0	; cargo el mensaje 
-	cpi R17,'\n'	;\r para putty y \n para android
+	cpi R17,\n	;\r para putty y \n para android
 	breq END_BLUETOOTH_MSG					
 	st Y+,r17; aca lo que falta es una validacion que permita reinciar la 
 			; direccion del  ram para poder volver a guardar el msj a 0x100
@@ -501,7 +501,8 @@ URXC_INT_HANDLER:
 	pop	r16
 	reti
 
-	END_BLUETOOTH_MSG:		
+	END_BLUETOOTH_MSG:	
+		st Y+,r17; guardo el \n en la RAM	
 		call reset_RAM
 		pop r20
 		pop	r19
