@@ -153,9 +153,9 @@ delay_1seg:
     			brne L2
 				ret	
 
-Set_ports:		sbi ddrb,0		;PWR para modulo(digital pin 8)
+Set_ports:		sbi ddrb,2		;PWR para modulo(digital pin 8)
 				;cbi portb,0
-				sbi ddrb,5		;para el led de prueba
+				;sbi ddrb,5		;para el led de prueba
 				;ldi r16,0xFF
 				;out ddrc,r16	;puerto C como salida
 				;ldi r16,0x00	
@@ -163,12 +163,26 @@ Set_ports:		sbi ddrb,0		;PWR para modulo(digital pin 8)
 				ret 
 
 prender_bluetooth:
-				push r16
-				in r16,portd
-				sbrc r16,0
+				
+				in r16,portb
+				sbrc r16,2
 				ret
-				sbi portd,2
+				sbi portb,2
+				ret
+
+prender_leds:
+				push r16
+				push r17
+				ldi r16,0x0F
+				in r17, portc
+				or r16,r17
+				out portc, r16
+				ldi r16,0xF0
+				in r17, portd
+				or r16,r17
+				out portd,r16
 				pop r16
+				pop r17
 				ret
 ;------------------------------------------------------------------------------------
 
@@ -186,7 +200,7 @@ URXC_INT_HANDLER:	push r16
 					;sbrs r17,7			;salto cuando el flag se borre
 					;rjmp salir
 					lds r17,UDR0	; cargo el mensaje 
-					cpi R17,'\r'	;\r para putty y \n para android
+					cpi R17,\n	;\r para putty y \n para android
 					breq salir					
 					st X+,r17; aca lo que falta es una validacion que permita reinciar la 
 							; direccion del  ram para poder volver a guardar el msj a 0x100
@@ -206,7 +220,8 @@ URXC_INT_HANDLER:	push r16
 
 					reti
 
-		salir:		call reset_RAM
+		salir:		call prender_leds
+					call reset_RAM
 					pop r20
 					pop	r19
 					pop	r18
@@ -218,12 +233,6 @@ URXC_INT_HANDLER:	push r16
 reset_RAM:
 				ldi XH,HIGH(msg)
 				ldi XL,LOW(msg)
-				sbi portb,5
-				call delay_1seg
-				call delay_1seg
-				call delay_1seg
-				call delay_1seg
-				cbi portb,5
 				ret
 				
 				

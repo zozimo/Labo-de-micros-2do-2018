@@ -83,10 +83,10 @@ main:
 		
 
 again:		
-		cbi portb,5
-		call delay_500ms
-		sbi portb,5
-		call delay_500ms
+		;cbi portb,5
+		;call delay_500ms
+		;sbi portb,5
+		;call delay_500ms
 		rjmp again
 
 
@@ -166,9 +166,9 @@ delay_1seg:
     			brne L2
 				ret	
 
-Set_ports:		sbi ddrd,2		;PWR para modulo(digital pin 8)
+Set_ports:		sbi ddrb,0		;PWR para modulo(digital pin 8)
 				;cbi portb,0
-				sbi ddrb,5		;para el led de prueba
+			;	sbi ddrb,5		;para el led de prueba
 				;ldi r16,0xFF
 				;out ddrc,r16	;puerto C como salida
 				;ldi r16,0x00	
@@ -245,9 +245,9 @@ UDRE_INT_HANDLER:
 
 prender_bluetooth:
 				
-				in r16,portd
+				in r16,portb
 				sbrc r16,0
 				ret
-				sbi portd,2
+				sbi portb,0
 				ret
 

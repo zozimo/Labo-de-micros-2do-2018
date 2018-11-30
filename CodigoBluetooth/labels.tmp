@@ -5,36 +5,33 @@
  <INCLUDE_PATH>
   <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m328pdef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.obj</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
-  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.hex</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.hex</FILE>
  </HEX_FILES>
  <OUTPUT_FILES>
-  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.map</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.map</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <AT><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>39</LINE></AT>
-  <ATPSWD><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>40</LINE></ATPSWD>
-  <ATROLE><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>42</LINE></ATROLE>
-  <ATUART><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>44</LINE></ATUART>
-  <ATNAME><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>45</LINE></ATNAME>
-  <main><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>68</LINE></main>
-  <UDRE_INT_HANDLER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>182</LINE></UDRE_INT_HANDLER>
-  <Set_ports><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>169</LINE></Set_ports>
-  <set_usart><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>122</LINE></set_usart>
-  <again><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>85</LINE></again>
-  <delay_500ms><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>144</LINE></delay_500ms>
-  <L1><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>148</LINE></L1>
-  <delay_1seg><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>157</LINE></delay_1seg>
-  <L2><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>161</LINE></L2>
-  <prender_bluetooth><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>246</LINE></prender_bluetooth>
-  <send_AT><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>206</LINE></send_AT>
-  <send><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm</FILE><LINE>230</LINE></send>
+  <msg><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>32</LINE></msg>
+  <main><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>54</LINE></main>
+  <URXC_INT_HANDLER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>193</LINE></URXC_INT_HANDLER>
+  <Set_ports><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>156</LINE></Set_ports>
+  <set_usart><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>109</LINE></set_usart>
+  <prender_bluetooth><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>165</LINE></prender_bluetooth>
+  <again><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>72</LINE></again>
+  <delay_500ms><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>131</LINE></delay_500ms>
+  <L1><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>135</LINE></L1>
+  <delay_1seg><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>144</LINE></delay_1seg>
+  <L2><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>148</LINE></L2>
+  <prender_leds><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>173</LINE></prender_leds>
+  <salir><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>223</LINE></salir>
+  <reset_RAM><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothToRAM.asm</FILE><LINE>233</LINE></reset_RAM>
  </LABELS>
 </ASSEMBLER_INFO>

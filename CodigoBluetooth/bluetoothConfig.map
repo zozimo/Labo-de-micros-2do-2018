@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm Thu Nov 22 22:09:15 2018
+AVRASM ver. 2.1.42  C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\CodigoBluetooth\bluetoothConfig.asm Fri Nov 30 10:51:33 2018
 
 
 EQU  SIGNATURE_000 0000001e
@@ -708,14 +708,14 @@ CSEG ATROLE       00000509
 CSEG ATUART       0000050f
 CSEG ATNAME       00000517
 CSEG main         00000034
-CSEG UDRE_INT_HANDLER 0000006b
-CSEG Set_ports    00000068
-CSEG set_usart    00000046
+CSEG UDRE_INT_HANDLER 00000064
+CSEG Set_ports    00000062
+CSEG set_usart    00000040
 CSEG again        0000003f
-CSEG delay_500ms  00000053
-CSEG L1           00000056
-CSEG delay_1seg   0000005e
-CSEG L2           00000061
-CSEG prender_bluetooth 0000008b
-CSEG send_AT      00000077
-CSEG send         00000083
+CSEG delay_500ms  0000004d
+CSEG L1           00000050
+CSEG delay_1seg   00000058
+CSEG L2           0000005b
+CSEG prender_bluetooth 00000084
+CSEG send_AT      00000070
+CSEG send         0000007c

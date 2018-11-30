@@ -363,15 +363,15 @@ set_usart:
 	ret
 
 Set_ports:		
-	sbi ddrb,4		;PWR para modulo(digital pin 8)
+	sbi ddrb,2		;PWR para modulo(digital pin 8)
 ;	sbi ddrb,5		;para el led de prueba
 	ret 
 
 prender_bluetooth:
 	in r16,portb
-	sbrc r16,4
+	sbrc r16,2
 	ret
-	sbi portb,4
+	sbi portb,2
 	ret
 
 reset_RAM:
