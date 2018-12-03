@@ -18,7 +18,7 @@
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
 .DEF	timeForOneGrade=R23
 ;.DEF	var1=R16
-.EQU	initial_position=255
+.EQU	initial_position=220
 ;---------	Reserva de memoria en RAM	------------
 .dseg
 .org SRAM_START
@@ -86,7 +86,7 @@ DICCIONARIO:
 	Y_LETTER: 	.db 0x80,0x40,0x3E,0x40,0x80,0 ;
 	Z_LETTER: 	.db 0x86,0x9A,0x92,0xB2,0xC2,0 ;
 
-testing_msg: .db "COMOESTAS",\n,0
+testing_msg: .db "HOLA",\n,0
 ;---------	Configuración de interrupciones	---------
 
 .ORG 0x00 ;Comienzo del código en la posición 0
@@ -135,7 +135,7 @@ ICP1_INTERRUPT:
 	ANDI R20, 0xD8
 	STS TIMSK1, R20 
 	;--------------------------------------------
-	;call delay_45_grades
+	call delay_45_grades
 	CALL PRINT_MSG
 	;---Activa interrupción del sensor hall---
 	LDS R20, TIMSK1 
@@ -178,16 +178,22 @@ PRINT_LETTER:
 	ADC ZH, R1
 
 	CALL PRINT_COL	; 1er columna
+	;call DELAY_1_GRADE
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 2da columna
+	;call DELAY_1_GRADE
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 3er columna
+	;call DELAY_1_GRADE
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 4ta columna
+	;call DELAY_1_GRADE
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 5ta columna
+	;call DELAY_1_GRADE
 	CALL DELAY_DOT_SPACE
 	CALL PRINT_COL	; 6ta columna (columna vacia)
+	;call DELAY_1_GRADE
 	CALL DELAY_DOT_SPACE
 
 	POP R18
@@ -315,9 +321,11 @@ DELAY_DOT_SPACE:
 
 ;------------------------------------------------
 delay_45_grades:
-	ldi R20, initial_position
+	ldi R20,(initial_position>>1); divido por 2 la posición inicial a pedido de Pablo
+	;ldi R20, initial_position
 	loop:
 		DEC R20
+		;call DELAY_1_GRADE
 		call DELAY_DOT_SPACE
 		CPI R20, 0
 		BRNE LOOP
@@ -398,7 +406,7 @@ CONFIG_TIMER:
 	STS TCCR1A, R20 ; Set timer as normal mode
 
 	LDS R20, TCCR1B
-	ORI R20, 0x41
+	ORI R20, 0x43;0x41
 	STS TCCR1B,R20 ; rising edge, prescaler 64, no noise canceller
 
 	CALL MEASURE_PERIOD
@@ -411,7 +419,7 @@ CONFIG_TIMER:
 	LDI R20, 0x00
 	OUT TCCR0A, R20
 
-	LDI R20, 0x01
+	LDI R20, 0x03;0x01
 	OUT TCCR0B, R20
 	
 	POP R24
