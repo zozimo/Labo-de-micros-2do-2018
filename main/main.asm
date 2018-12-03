@@ -1,30 +1,47 @@
+/*
+------------------------------------------------
+TRABAJO PRÁCTICO INTEGRADOR
+Laboratorio de microprocesadores (86.07)
+Facultad de Ingeniería - Universidad de Buenos Aires
+Proyecto: Display POV
+Autores: Aranda Zózimo,Cristian, Carrero Riveros, Daniela
+2do cuatrimestre 2018
+------------------------------------------------
+*/
 ; Archivo principal
 
 .include"m328pdef.inc"
 .device atmega328p
 
-.def input_reg = R16 ;
-.def output_reg = R17 ;
+.DEF input_reg = R16 ;
 
-.equ msg_size = 24	; mensaje de 9 símbolos ascii (6 bytes cada uno)
+.EQU msg_size = 36	; mensaje preconfigurado de 6 símbolos ascii (6 bytes cada uno)
 
 ; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
 .EQU	constL=0x67		;baudaje de 9600
 .EQU	constH=0x00
-.EQU	maxSpeed=0x00 ;constantes para validar la velocidad minima y maxima del 
-.EQU	minSpeed=0xF0
 .EQU	\r=0x0D					;\r y \n, no modificar!!!!
 .EQU	\n=0x0A					;Necesarios al final de cada comando AT
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
-.DEF	timeForOneGrade=R23
-;.DEF	var1=R16
-.EQU	initial_position=220
+
+.DEF	timeForOneGradeReg=R23
+
+.EQU	maxSpeed=0x00 ;constantes para validar la velocidad minima y maxima del 
+.EQU	minSpeed=0xF0
+
+.EQU	initial_position=220	; valor del angulo inicial
+
+
 ;---------	Reserva de memoria en RAM	------------
 .dseg
 .org SRAM_START
-	msg : .byte msg_size
+	msg : .byte msg_size	; Reserva de RAM para el mensaje preconfigurado
+
+;------------------------------------------------
+
 .cseg
 .ORG 0x600
+
 DICCIONARIO:
 /*	SPACE_MK:	.db 0x00,0x00,0x00,0x00,0x00,0 
 	EXCL_MK:	.db 0x00,0x00,0xFA,0x00,0x00,0 
@@ -59,34 +76,38 @@ DICCIONARIO:
 	GREATER_MK:	.db 0x00,0x82,0x44,0x28,0x10,0 
 	ASK_MK:		.db 0x60,0x80,0x9A,0x90,0x60,0 
 	AT_MK:		.db 0x3C,0x42,0x5C,0x54,0x3C,0 */
-	A_LETTER:	.db 0x7E,0x90,0x90,0x90,0x7E,0 ;
-	B_LETTER: 	.db 0xFE,0x92,0x92,0xF2,0x0E,0 ;
-	C_LETTER:	.db 0xFE,0x82,0x82,0x82,0x82,0 ;
-	D_LETTER: 	.db 0xFE,0x82,0x82,0x82,0x7C,0 ;
-	E_LETTER: 	.db 0xFE,0x92,0x92,0x92,0x82,0 ;
-	F_LETTER: 	.db 0xFE,0x90,0x90,0x90,0x80,0 ;
-	G_LETTER: 	.db 0x7C,0x82,0x92,0x92,0x9C,0 ;
-	H_LETTER: 	.db 0xFE,0x10,0x10,0x10,0xFE,0 ;
-	I_LETTER: 	.db 0x00,0x00,0xFE,0x00,0x00,0 ;
-	J_LETTER: 	.db 0x8E,0x82,0xFE,0x80,0x80,0 ;
-	K_LETTER: 	.db 0xFE,0x10,0x28,0x44,0x82,0 ;
-	L_LETTER: 	.db 0xFE,0x02,0x02,0x02,0x02,0 ;
-	M_LETTER: 	.db 0xFE,0x60,0x30,0x60,0xFE,0 ;
-	N_LETTER: 	.db 0xFE,0x06,0x18,0x06,0xFE,0 ;
-	O_LETTER: 	.db 0x7C,0x82,0x82,0x82,0x7C,0 ;
-	P_LETTER: 	.db 0xFE,0x90,0x90,0x90,0x60,0 ;
-	Q_LETTER:	.db 0x7C,0x82,0x8A,0x86,0x7E,0 ;
-	R_LETTER: 	.db 0xFE,0x90,0x98,0x94,0x62,0 ;
-	S_LETTER:	.db 0x64,0x92,0x92,0x92,0x4C,0 ;
-	T_LETTER: 	.db 0x80,0x80,0xFE,0x80,0x80,0 ;
-	U_LETTER: 	.db 0xFC,0x02,0x02,0x02,0xFC,0 ;
-	V_LETTER: 	.db 0xC0,0x38,0x0E,0x38,0xC0,0 ;
-	W_LETTER: 	.db 0xFE,0x06,0x30,0x06,0xFE,0 ;
-	X_LETTER: 	.db 0xC6,0x6C,0x10,0x6C,0xC6,0 ;
-	Y_LETTER: 	.db 0x80,0x40,0x3E,0x40,0x80,0 ;
-	Z_LETTER: 	.db 0x86,0x9A,0x92,0xB2,0xC2,0 ;
+	A_LETTER:	.db 0x7E,0x90,0x90,0x90,0x7E,0 
+	B_LETTER: 	.db 0xFE,0x92,0x92,0xF2,0x0E,0 
+	C_LETTER:	.db 0xFE,0x82,0x82,0x82,0x82,0 
+	D_LETTER: 	.db 0xFE,0x82,0x82,0x82,0x7C,0 
+	E_LETTER: 	.db 0xFE,0x92,0x92,0x92,0x82,0 
+	F_LETTER: 	.db 0xFE,0x90,0x90,0x90,0x80,0 
+	G_LETTER: 	.db 0x7C,0x82,0x92,0x92,0x9C,0 
+	H_LETTER: 	.db 0xFE,0x10,0x10,0x10,0xFE,0 
+	I_LETTER: 	.db 0x00,0x00,0xFE,0x00,0x00,0 
+	J_LETTER: 	.db 0x8E,0x82,0xFE,0x80,0x80,0 
+	K_LETTER: 	.db 0xFE,0x10,0x28,0x44,0x82,0 
+	L_LETTER: 	.db 0xFE,0x02,0x02,0x02,0x02,0 
+	M_LETTER: 	.db 0xFE,0x60,0x30,0x60,0xFE,0 
+	N_LETTER: 	.db 0xFE,0x06,0x18,0x06,0xFE,0 
+	O_LETTER: 	.db 0x7C,0x82,0x82,0x82,0x7C,0 
+	P_LETTER: 	.db 0xFE,0x90,0x90,0x90,0x60,0 
+	Q_LETTER:	.db 0x7C,0x82,0x8A,0x86,0x7E,0 
+	R_LETTER: 	.db 0xFE,0x90,0x98,0x94,0x62,0 
+	S_LETTER:	.db 0x64,0x92,0x92,0x92,0x4C,0 
+	T_LETTER: 	.db 0x80,0x80,0xFE,0x80,0x80,0 
+	U_LETTER: 	.db 0xFC,0x02,0x02,0x02,0xFC,0 
+	V_LETTER: 	.db 0xC0,0x38,0x0E,0x38,0xC0,0 
+	W_LETTER: 	.db 0xFE,0x06,0x30,0x06,0xFE,0 
+	X_LETTER: 	.db 0xC6,0x6C,0x10,0x6C,0xC6,0 
+	Y_LETTER: 	.db 0x80,0x40,0x3E,0x40,0x80,0 
+	Z_LETTER: 	.db 0x86,0x9A,0x92,0xB2,0xC2,0 
+
+
+;---------		Mensaje preconfigurado		---------		
 
 testing_msg: .db "HOLA",\n,0
+
 ;---------	Configuración de interrupciones	---------
 
 .ORG 0x00 ;Comienzo del código en la posición 0
@@ -102,52 +123,40 @@ testing_msg: .db "HOLA",\n,0
 .ORG INT_VECTORS_SIZE
 
 
-
-
-
-
+;------------------------------------------------
+;	RUTINAS PRINCIPAL
+;------------------------------------------------
 
 main:
 	;inicializa el SP
-	LDI output_reg, HIGH(RAMEND) ; Carga el SPH
-	OUT SPH, output_reg
-	LDI output_reg, LOW(RAMEND) ;Carga el SPL
-	OUT SPL, output_reg
+	LDI R17, HIGH(RAMEND) ; Carga el SPH
+	OUT SPH, R17
+	LDI R17, LOW(RAMEND) ;Carga el SPL
+	OUT SPL, R17
 
+	; configuración de pines conectados a los LEDs
+	LDI R17, 0x0F
+	OUT DDRC,R17	; C0...C3 como salidas
+	SWAP R17
+	OUT DDRD,R17	; D4...D7 como salidas
 
-	LDI output_reg, 0x0F
-	OUT DDRC,output_reg	; C0...C3 como salidas
-	SWAP output_reg
-	OUT DDRD,output_reg	; D4...D7 como salidas
-	CALL ST_MSG_TO_RAM
-	CALL BLUETOOTH_TO_RAM
+	CALL ST_MSG_TO_RAM	; carga de mensaje preconfigurado
+	CALL BLUETOOTH_TO_RAM	;configuración de uso de Bluetooth
 	
-	CALL CONFIG_TIMER
+	CALL CONFIG_TIMER	; configuración de timers, medición y validación de velocidad de giro
 
-	SEI
+	SEI		; habilitación de interrupciones globales
+
 here:	
 	JMP here
 	
-ICP1_INTERRUPT:
-	SEI
-	;---Desactiva interrupción del sensor hall---
-	LDS R20, TIMSK1 
-	ANDI R20, 0xD8
-	STS TIMSK1, R20 
-	;--------------------------------------------
-	call delay_45_grades
-	CALL PRINT_MSG
-	;---Activa interrupción del sensor hall---
-	LDS R20, TIMSK1 
-	ORI R20, 0x20
-	STS TIMSK1, R20 
-	;--------------------------------------------
-	RETI
-;	JMP end
 
+;------------------------------------------------
+;	RUTINAS DE MANEJO DE DICCIONARIO
 ;------------------------------------------------
 ; recibe en Z la posición de la columna a imprimir
 ; avanza a la siguiente columna
+
 PRINT_COL:
 	PUSH R20
 	LPM R20,Z+
@@ -164,7 +173,8 @@ PRINT_COL:
 ;recibe en el registro de entrada una letra en ascii
 ;utiliza puntero z como intermedio
 ;input_reg esta usado como ascii
-;posición de la letra = DICCIONARIO + (input_reg -'A')*5
+;posición de la letra = DICCIONARIO + (input_reg -'A')*6
+
 PRINT_LETTER:
 	PUSH input_reg
 	PUSH R18
@@ -201,8 +211,9 @@ PRINT_LETTER:
 	RET
 
 ;------------------------------------------------
-;lee de RAM una frase e imprime letra por letra
-;usa input_reg para cada letra individual
+;	lee de RAM una frase e imprime letra por letra
+;	usa input_reg para cada letra individual
+
 PRINT_MSG:
 	
 	LDI XH, HIGH(msg)	; variable para desplazarse en el mensaje en RAM
@@ -213,20 +224,20 @@ PRINT_MSG:
 		BREQ PRINT_MSG_END
 		CPI input_reg,0xFF	; validacion contra fin de cadena
 		BREQ PRINT_MSG_END
+		CPI input_reg,\r	; validacion contra fin de cadena
+		BREQ PRINT_MSG_END
 		CPI input_reg,\n	; validacion contra fin de cadena
 		BREQ PRINT_MSG_END
 		CALL PRINT_LETTER	; imprimir letra
 		JMP PRINT_MSG_LOOP
-	
 
 	PRINT_MSG_END:
-		
-
 		RET
-
 
 ;------------------------------------------------
 ; guarda un mensaje desde FLASH a RAM
+; usado para cargar el mensaje preconfigurado
+
 ST_MSG_TO_RAM:
 	PUSH R16
 	LDI ZH, HIGH(testing_msg<<1)
@@ -245,10 +256,13 @@ ST_MSG_TO_RAM:
 	ST_MSG_TO_RAM_END:
 		POP R16
 		RET
+
 ;------------------------------------------------
 ;	DELAYS
 ;------------------------------------------------
-;Delay de 1 grado que va a ser utilizado para generar delays de cierta cantidad de grados (es un delay dinámico basado en el periodo medido)
+;	Delay de 1 grado que va a ser utilizado para generar delays de cierta cantidad de grados 
+;	Es un delay dinámico basado en el periodo medido
+
 DELAY_1_GRADE:
 		PUSH R20
 
@@ -263,26 +277,10 @@ DELAY_1_GRADE:
 
 		POP R20
 	RET
-;--------------------------------------------------
-;espera el tiempo correspondiente al espacio entre letras
-; 2.9ms a 16 MHz
-DELAY_3_MS:
-		push r22
-		push R24
 
-	    ldi  r22, 63
-	    ldi  R24, 83
-	LOOP_LETTER_SPACE: 
-		dec  R24
-	    brne LOOP_LETTER_SPACE
-	    dec  r22
-	    brne LOOP_LETTER_SPACE
-	
-		pop R24
-		pop r22
-		
-	RET
 ;-------------------------------------------------
+;	Delay usado solo para visualizar validación de velocidad
+
 DELAY_500_MS:
 		push r18
 		push r19
@@ -291,23 +289,24 @@ DELAY_500_MS:
 		ldi  r18, 41
 	    ldi  r19, 150
 	    ldi  r20, 128
-	L1: dec  r20
-	    brne L1
-	    dec  r19
-	    brne L1
-	    dec  r18
-	    brne L1
+	LOOP_DELAY_500_MS:
+			dec  r20
+		    brne LOOP_DELAY_500_MS
+		    dec  r19
+		    brne LOOP_DELAY_500_MS
+		    dec  r18
+		    brne LOOP_DELAY_500_MS
 
 		pop r20
 		pop r19
-		pop r18
-
-		
+		pop r18	
 
 		ret
+
 ;------------------------------------------------
-;espera el tiempo correspondiente al espacio entre columnas de una letra
-; 599,5 us a 16 MHz
+; espera el tiempo correspondiente al espacio entre columnas de una letra
+; delay fijo de 599,5 us a 16 MHz
+
 DELAY_DOT_SPACE:
 	    ldi  r22, 13
 	    ldi  r23, 116
@@ -320,20 +319,26 @@ DELAY_DOT_SPACE:
 	RET
 
 ;------------------------------------------------
-delay_45_grades:
+; delay usado para desplazar el angulo inicial del display
+
+DELAY_INITIAL_POSITION:
 	ldi R20,(initial_position>>1); divido por 2 la posición inicial a pedido de Pablo
 	;ldi R20, initial_position
 	loop:
 		DEC R20
-		;call DELAY_1_GRADE
-		call DELAY_DOT_SPACE
+		;call DELAY_1_GRADE		; delay dinámico
+		call DELAY_DOT_SPACE	; delay fijo
 		CPI R20, 0
 		BRNE LOOP
 
 	ret
+
+
 ;------------------------------------------------
 ;	RUTINAS DE BLUETOOTH
 ;------------------------------------------------
+;	Rutina general de configuración de Bluetooth
+
 BLUETOOTH_TO_RAM:
 	ldi YH,HIGH(msg)
 	ldi YL,LOW(msg)
@@ -353,6 +358,7 @@ BLUETOOTH_TO_RAM:
 ;Establecer un Bauderate de 9600	(en UBRR0H/UBRR0L )
 ;con un micro de 16MHZ(Ver formula)
 ;-----------------------------------------------------------
+
 set_usart:
 ;--->>> Habilitar  receptor RXEN0 y habilito la interrupcion de recepcion completa RXCIE0
 	
@@ -370,10 +376,14 @@ set_usart:
 	STS	UBRR0H,r16
 	ret
 
+;------------------------------------------------
+
 Set_ports:		
 	sbi ddrb,2		;PWR para modulo(digital pin 8)
 ;	sbi ddrb,5		;para el led de prueba
 	ret 
+
+;------------------------------------------------
 
 prender_bluetooth:
 	in r16,portb
@@ -382,18 +392,20 @@ prender_bluetooth:
 	sbi portb,2
 	ret
 
+;------------------------------------------------
+; Rutina para reiniciar la posicion en RAM y sobreescribir el mensaje
+
 reset_RAM:
 	ldi YH,HIGH(msg)
 	ldi YL,LOW(msg)
 	ret
 
-
 ;-------------------------------
 ;	RUTINAS DE TIMER
 ;-------------------------------
-;Configuración de los timers utilizados en el proyecto
-;Timer 1 para medir periodo
-;Timer 0 para establecer delay de un grado basado en el valor del periodo obtenido
+; Configuración de los timers utilizados en el proyecto
+; Timer 1 para medir periodo
+; Timer 0 para establecer delay de un grado basado en el valor del periodo obtenido
 
 CONFIG_TIMER:
 	PUSH R20
@@ -413,8 +425,9 @@ CONFIG_TIMER:
 	STS TCCR1A, R20 ; Setear timer como modo normal
 
 	LDS R20, TCCR1B
-	ORI R20, 0x43;0x41
-	STS TCCR1B,R20 ; flanco ascendente, prescaler 64, cancelador de ruido
+	ORI R20, 0x43	; flanco ascendente, prescaler 64, cancelador de ruido
+	;ORI R20, 0x41	; flanco ascendente, sin prescaler, cancelador de ruido
+	STS TCCR1B,R20 
 	;-------------------------------------
 
 	CALL MEASURE_PERIOD
@@ -422,25 +435,26 @@ CONFIG_TIMER:
 	;-------------------------------------
 	;config timer para el delay de 1 grado
 	LDI R24, 0xFF 
-	SUB R24, timeForOneGrade ;timeForOneGrade contiene el valor alto del tiempo del periodo. Este representaría el tiempo de un grado. Fue calculado en MEASURE_PERIOD
+	SUB R24, timeForOneGradeReg ;timeForOneGradeReg contiene el valor alto del tiempo del periodo. Este representaría el tiempo de un grado. Fue calculado en MEASURE_PERIOD
 	OUT TCNT0, R24
 		
 	LDI R20, 0x00
 	OUT TCCR0A, R20
 
-	LDI R20, 0x03;0x01
+	LDI R20, 0x03	; prescaler 64
+	;LDI R20, 0x01	; sin prescaler
+	
 	OUT TCCR0B, R20
 	;-------------------------------------
 	
 	POP R24
 	POP R20
-	
 	RET
 
 ;-------------------------------
-;	Mide el periodo de una señal rectangular dado entre dos flancos ascendentes
-;	Usar luego de CONFIG_TIMER
-;	Devuelve en R23:R22 el periodo de la señal
+; Mide el periodo de una señal rectangular dado entre dos flancos ascendentes
+; Usar luego de CONFIG_TIMER
+; Devuelve en R23:R22 el periodo de la señal
 
 MEASURE_PERIOD:
 	PUSH R21
@@ -453,7 +467,7 @@ MEASURE_PERIOD:
 		;Cuando hay una interrupción en ICP1, el flag ICF1 se activa (dentro del registro TIFR1).
 		SBRS R21, ICF1 ; Saltea la siguiente instrucción si ICF1 flag está activado.
 		RJMP MEASURE_PERIOD_L1; loop hasta que hay una interrupción (Espera al momento en que el sensor hall pasa por el iman) 
-		LDS timeForOneGrade, ICR1L
+		LDS timeForOneGradeReg, ICR1L
 		LDS R24, ICR1H
 		OUT TIFR1, R21 ; clear ICF1 (para luego detectar una nueva interrupción)
 		;SBI PORTB, 5  ;Solo para pruebas
@@ -466,10 +480,10 @@ MEASURE_PERIOD:
 		SBI PORTB, 6
 		OUT TIFR1, R21 ; clear ICF1
 		LDS R22, ICR1L
-		SUB R22, timeForOneGrade; Periodo = segundo flanco - primer flanco
+		SUB R22, timeForOneGradeReg; Periodo = segundo flanco - primer flanco
 
-		LDS timeForOneGrade, ICR1H ;Este registro será utilizado para validar la velocidad del POV. 
-		SBC timeForOneGrade, R24; R23 = R23 - R24 - C
+		LDS timeForOneGradeReg, ICR1H ;Este registro será utilizado para validar la velocidad del POV. 
+		SBC timeForOneGradeReg, R24; R23 = R23 - R24 - C
 		;CBI PORTB, 5 ;Solo para pruebas
 	CALL SET_TIME_PER_GRADE
 	
@@ -479,20 +493,19 @@ MEASURE_PERIOD:
 	RET
 
 ;---------------------------------------------------
-;Rutina para validar la velocidad del POV -> a qué velocidad empieza a imprimir el mensaje.
-;Se establecen velocidades máximas y mínimas
-;Usar luego de MEASURE_PERIOD
+; Rutina para validar la velocidad del POV -> a qué velocidad empieza a imprimir el mensaje.
+; Se establecen velocidades máximas y mínimas
+; Usar luego de MEASURE_PERIOD
 
 SET_TIME_PER_GRADE:
 
-
 	SBI PORTC, 0
 	LDI R20, minSpeed ;Compara con un valor determinado para establecer una velocidad minima
-	CP R20, timeForOneGrade
+	CP R20, timeForOneGradeReg
 	BRSH MEASURE_PERIOD
 
 	SBI PORTD, 7
-	CPI timeForOneGrade, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
+	CPI timeForOneGradeReg, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
 	BREQ MEASURE_PERIOD
 
 	CALL DELAY_500_MS ; delay para hacer visible los LEDs
@@ -505,6 +518,23 @@ SET_TIME_PER_GRADE:
 ;-------------------------------
 ;	INTERRUPCIONES
 ;-------------------------------
+ICP1_INTERRUPT:
+	SEI
+	;---Desactiva interrupción del sensor hall---
+	LDS R20, TIMSK1 
+	ANDI R20, 0xD8
+	STS TIMSK1, R20 
+	;--------------------------------------------
+	call DELAY_INITIAL_POSITION
+	CALL PRINT_MSG
+	;---Activa interrupción del sensor hall---
+	LDS R20, TIMSK1 
+	ORI R20, 0x20
+	STS TIMSK1, R20 
+	;--------------------------------------------
+	RETI
+
+;-------------------------------
 URXC_INT_HANDLER:	
 	push r16
 	push r17
@@ -513,10 +543,14 @@ URXC_INT_HANDLER:
 	push r20
 
 	lds r17,UDR0	; cargo el mensaje 
-	cpi R17,\n	;\r para putty y \n para android
-	breq END_BLUETOOTH_MSG					
-	st Y+,r17; aca lo que falta es una validacion que permita reinciar la 
-			; direccion del  ram para poder volver a guardar el msj a 0x100
+	;st Y+,r17
+	cpi R17,\r	;\r para putty
+	breq END_BLUETOOTH_MSG	
+	cpi R17,\n	;\n para android
+	breq END_BLUETOOTH_MSG	
+					
+	st Y+,r17
+
 	pop r20
 	pop	r19
 	pop	r18
@@ -525,7 +559,8 @@ URXC_INT_HANDLER:
 	reti
 
 	END_BLUETOOTH_MSG:	
-		st Y+,r17; guardo el \n en la RAM	
+		st Y+,r17; guardo el \n en la RAM
+			
 		call reset_RAM
 		pop r20
 		pop	r19
@@ -535,5 +570,3 @@ URXC_INT_HANDLER:
 		reti
 
 ;------------------------------
-;	END
-end: jmp end
