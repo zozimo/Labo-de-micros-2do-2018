@@ -248,7 +248,7 @@ ST_MSG_TO_RAM:
 ;------------------------------------------------
 ;	DELAYS
 ;------------------------------------------------
-;Delay de 1 grado que va a ser utilizado para generar delays de cierta cantidad de grados
+;Delay de 1 grado que va a ser utilizado para generar delays de cierta cantidad de grados (es un delay dinámico basado en el periodo medido)
 DELAY_1_GRADE:
 		PUSH R20
 
@@ -391,26 +391,35 @@ reset_RAM:
 ;-------------------------------
 ;	RUTINAS DE TIMER
 ;-------------------------------
+;Configuración de los timers utilizados en el proyecto
+;Timer 1 para medir periodo
+;Timer 0 para establecer delay de un grado basado en el valor del periodo obtenido
+
 CONFIG_TIMER:
 	PUSH R20
 	PUSH R24
-
+	
+	;Configura pin B.O como entrada para la interrupción de captura (ÌCP1)
 	CBI DDRB, 0
 	
+	;-------------------------------------
+	;Config timer para medir el periodo
 	LDS R20, TIMSK1  ;Activa interrupcion del timer al capturar señal del pin B.0
 	ORI R20, 0x20
 	STS TIMSK1, R20 
 			
 	LDS R20, TCCR1A
 	ANDI R20, 0x0C
-	STS TCCR1A, R20 ; Set timer as normal mode
+	STS TCCR1A, R20 ; Setear timer como modo normal
 
 	LDS R20, TCCR1B
 	ORI R20, 0x43;0x41
-	STS TCCR1B,R20 ; rising edge, prescaler 64, no noise canceller
+	STS TCCR1B,R20 ; flanco ascendente, prescaler 64, cancelador de ruido
+	;-------------------------------------
 
 	CALL MEASURE_PERIOD
 	
+	;-------------------------------------
 	;config timer para el delay de 1 grado
 	LDI R24, 0xFF 
 	SUB R24, timeForOneGrade ;timeForOneGrade contiene el valor alto del tiempo del periodo. Este representaría el tiempo de un grado. Fue calculado en MEASURE_PERIOD
@@ -421,6 +430,7 @@ CONFIG_TIMER:
 
 	LDI R20, 0x03;0x01
 	OUT TCCR0B, R20
+	;-------------------------------------
 	
 	POP R24
 	POP R20
@@ -430,7 +440,7 @@ CONFIG_TIMER:
 ;-------------------------------
 ;	Mide el periodo de una señal rectangular dado entre dos flancos ascendentes
 ;	Usar luego de CONFIG_TIMER
-;	Devuelve en R22:R23 el periodo de la señal
+;	Devuelve en R23:R22 el periodo de la señal
 
 MEASURE_PERIOD:
 	PUSH R21
@@ -438,26 +448,27 @@ MEASURE_PERIOD:
 	PUSH R24
 
 	MEASURE_PERIOD_L1:
-	
-		IN R21, TIFR1 ;timer interrupt
-		;When there's an interruption, ICF1 flag is set.
-		SBRS R21, ICF1 ; Skip next if ICF1 flag is set.
-		RJMP MEASURE_PERIOD_L1; loop until there's an interruption (?
+	;Se espera a obtener el primer flanco ascendente para la señal del sensor Hall
+		IN R21, TIFR1 ;Registro de interrupción del timer
+		;Cuando hay una interrupción en ICP1, el flag ICF1 se activa (dentro del registro TIFR1).
+		SBRS R21, ICF1 ; Saltea la siguiente instrucción si ICF1 flag está activado.
+		RJMP MEASURE_PERIOD_L1; loop hasta que hay una interrupción (Espera al momento en que el sensor hall pasa por el iman) 
 		LDS timeForOneGrade, ICR1L
 		LDS R24, ICR1H
-		OUT TIFR1, R21 ; clear ICF1
+		OUT TIFR1, R21 ; clear ICF1 (para luego detectar una nueva interrupción)
 		;SBI PORTB, 5  ;Solo para pruebas
 
 	MEASURE_PERIOD_L2:
+	;Se espera a obtener el segundo flanco ascendente para la señal del sensor Hall
 		IN R21, TIFR1
-		SBRS R21, ICF1 ; Skip next if ICF1 = 1
+		SBRS R21, ICF1 ; Saltea la siguiente instrucción si ICF1 = 1
 		RJMP MEASURE_PERIOD_L2
 		SBI PORTB, 6
 		OUT TIFR1, R21 ; clear ICF1
 		LDS R22, ICR1L
-		SUB R22, timeForOneGrade; Period = Second edge - First edge
+		SUB R22, timeForOneGrade; Periodo = segundo flanco - primer flanco
 
-		LDS timeForOneGrade, ICR1H
+		LDS timeForOneGrade, ICR1H ;Este registro será utilizado para validar la velocidad del POV. 
 		SBC timeForOneGrade, R24; R23 = R23 - R24 - C
 		;CBI PORTB, 5 ;Solo para pruebas
 	CALL SET_TIME_PER_GRADE
@@ -468,17 +479,21 @@ MEASURE_PERIOD:
 	RET
 
 ;---------------------------------------------------
+;Rutina para validar la velocidad del POV -> a qué velocidad empieza a imprimir el mensaje.
+;Se establecen velocidades máximas y mínimas
+;Usar luego de MEASURE_PERIOD
+
 SET_TIME_PER_GRADE:
-	SBI PORTD, 7
-	CPI timeForOneGrade, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
-	BREQ MEASURE_PERIOD
+
 
 	SBI PORTC, 0
-	LDI R20, minSpeed
+	LDI R20, minSpeed ;Compara con un valor determinado para establecer una velocidad minima
 	CP R20, timeForOneGrade
 	BRSH MEASURE_PERIOD
 
-
+	SBI PORTD, 7
+	CPI timeForOneGrade, maxSpeed ; Comparar con 0, quiere decir que la velocidad es demasiado alta
+	BREQ MEASURE_PERIOD
 
 	CALL DELAY_500_MS ; delay para hacer visible los LEDs
 	CBI PORTD, 7
