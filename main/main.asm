@@ -4,7 +4,7 @@ TRABAJO PRÁCTICO INTEGRADOR
 Laboratorio de microprocesadores (86.07)
 Facultad de Ingeniería - Universidad de Buenos Aires
 Proyecto: Display POV
-Autores: Aranda Zózimo,Cristian, Carrero Riveros, Daniela
+Autores: Aranda Cordero,Cristian Z.- Carrero Riveros, Daniela - González, Pablo Javier.
 2do cuatrimestre 2018
 ------------------------------------------------
 */
@@ -19,7 +19,7 @@ Autores: Aranda Zózimo,Cristian, Carrero Riveros, Daniela
 
 ; Las siguientes constantes establecen el UBRR0L y UBRRH para definir el BAUDE RATE
 .EQU	constL=0x67		;baudaje de 9600
-.EQU	constH=0x00
+.EQU	constH=0x00		;baudaje de 9600
 .EQU	\r=0x0D					;\r y \n, no modificar!!!!
 .EQU	\n=0x0A					;Necesarios al final de cada comando AT
 .DEF	buffer=R5				;exclusivo para enviar los datos al udreo
@@ -322,8 +322,8 @@ DELAY_DOT_SPACE:
 ; delay usado para desplazar el angulo inicial del display
 
 DELAY_INITIAL_POSITION:
-	ldi R20,(initial_position>>1); divido por 2 la posición inicial a pedido de Pablo
-	;ldi R20, initial_position
+	;ldi R20,(initial_position>>1); divido por 2 la posición inicial a pedido de Pablo
+	ldi R20, initial_position
 	loop:
 		DEC R20
 		;call DELAY_1_GRADE		; delay dinámico
@@ -520,12 +520,13 @@ SET_TIME_PER_GRADE:
 ;-------------------------------
 ICP1_INTERRUPT:
 	SEI
+	call DELAY_INITIAL_POSITION
 	;---Desactiva interrupción del sensor hall---
 	LDS R20, TIMSK1 
 	ANDI R20, 0xD8
 	STS TIMSK1, R20 
 	;--------------------------------------------
-	call DELAY_INITIAL_POSITION
+	
 	CALL PRINT_MSG
 	;---Activa interrupción del sensor hall---
 	LDS R20, TIMSK1 

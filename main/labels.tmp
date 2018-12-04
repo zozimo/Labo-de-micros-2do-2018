@@ -1,82 +1,82 @@
 <ASSEMBLER_INFO>
  <VERSION>2.1.42</VERSION>
  <DEVICE>ATmega328P</DEVICE>
- <WORKING_DIR>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main</WORKING_DIR>
+ <WORKING_DIR>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m328pdef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.obj</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
-  <FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.hex</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.hex</FILE>
  </HEX_FILES>
  <OUTPUT_FILES>
-  <FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.map</FILE>
+  <FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.map</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <msg><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>38</LINE></msg>
-  <DICCIONARIO><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>45</LINE></DICCIONARIO>
-  <A_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>79</LINE></A_LETTER>
-  <B_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>80</LINE></B_LETTER>
-  <C_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>81</LINE></C_LETTER>
-  <D_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>82</LINE></D_LETTER>
-  <E_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>83</LINE></E_LETTER>
-  <F_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>84</LINE></F_LETTER>
-  <G_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>85</LINE></G_LETTER>
-  <H_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>86</LINE></H_LETTER>
-  <I_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>87</LINE></I_LETTER>
-  <J_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>88</LINE></J_LETTER>
-  <K_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>89</LINE></K_LETTER>
-  <L_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>90</LINE></L_LETTER>
-  <M_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>91</LINE></M_LETTER>
-  <N_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>92</LINE></N_LETTER>
-  <O_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>93</LINE></O_LETTER>
-  <P_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>94</LINE></P_LETTER>
-  <Q_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>95</LINE></Q_LETTER>
-  <R_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>96</LINE></R_LETTER>
-  <S_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>97</LINE></S_LETTER>
-  <T_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>98</LINE></T_LETTER>
-  <U_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>99</LINE></U_LETTER>
-  <V_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>100</LINE></V_LETTER>
-  <W_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>101</LINE></W_LETTER>
-  <X_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>102</LINE></X_LETTER>
-  <Y_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>103</LINE></Y_LETTER>
-  <Z_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>104</LINE></Z_LETTER>
-  <testing_msg><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>109</LINE></testing_msg>
-  <main><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>130</LINE></main>
-  <ICP1_INTERRUPT><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>521</LINE></ICP1_INTERRUPT>
-  <URXC_INT_HANDLER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>538</LINE></URXC_INT_HANDLER>
-  <ST_MSG_TO_RAM><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>241</LINE></ST_MSG_TO_RAM>
-  <BLUETOOTH_TO_RAM><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>342</LINE></BLUETOOTH_TO_RAM>
-  <CONFIG_TIMER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>410</LINE></CONFIG_TIMER>
-  <here><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>150</LINE></here>
-  <PRINT_COL><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>160</LINE></PRINT_COL>
-  <PRINT_LETTER><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>178</LINE></PRINT_LETTER>
-  <DELAY_DOT_SPACE><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>310</LINE></DELAY_DOT_SPACE>
-  <PRINT_MSG><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>217</LINE></PRINT_MSG>
-  <PRINT_MSG_LOOP><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>221</LINE></PRINT_MSG_LOOP>
-  <PRINT_MSG_END><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>234</LINE></PRINT_MSG_END>
-  <ST_MSG_TO_RAM_LOOP><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>249</LINE></ST_MSG_TO_RAM_LOOP>
-  <ST_MSG_TO_RAM_END><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>256</LINE></ST_MSG_TO_RAM_END>
-  <DELAY_1_GRADE><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>266</LINE></DELAY_1_GRADE>
-  <DELAY_500_MS><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>284</LINE></DELAY_500_MS>
-  <LOOP_DELAY_500_MS><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>292</LINE></LOOP_DELAY_500_MS>
-  <LOOP_DOT_SPACE><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>313</LINE></LOOP_DOT_SPACE>
-  <DELAY_INITIAL_POSITION><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>324</LINE></DELAY_INITIAL_POSITION>
-  <loop><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>327</LINE></loop>
-  <Set_ports><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>381</LINE></Set_ports>
-  <set_usart><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>362</LINE></set_usart>
-  <prender_bluetooth><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>388</LINE></prender_bluetooth>
-  <reset_RAM><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>398</LINE></reset_RAM>
-  <MEASURE_PERIOD><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>459</LINE></MEASURE_PERIOD>
-  <MEASURE_PERIOD_L1><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>464</LINE></MEASURE_PERIOD_L1>
-  <MEASURE_PERIOD_L2><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>475</LINE></MEASURE_PERIOD_L2>
-  <SET_TIME_PER_GRADE><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>500</LINE></SET_TIME_PER_GRADE>
-  <END_BLUETOOTH_MSG><FILE>C:\Users\Pablo\Desktop\Labo-de-micros-2do-2018-master\main\main.asm</FILE><LINE>561</LINE></END_BLUETOOTH_MSG>
+  <msg><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>38</LINE></msg>
+  <DICCIONARIO><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>45</LINE></DICCIONARIO>
+  <A_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>79</LINE></A_LETTER>
+  <B_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>80</LINE></B_LETTER>
+  <C_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>81</LINE></C_LETTER>
+  <D_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>82</LINE></D_LETTER>
+  <E_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>83</LINE></E_LETTER>
+  <F_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>84</LINE></F_LETTER>
+  <G_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>85</LINE></G_LETTER>
+  <H_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>86</LINE></H_LETTER>
+  <I_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>87</LINE></I_LETTER>
+  <J_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>88</LINE></J_LETTER>
+  <K_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>89</LINE></K_LETTER>
+  <L_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>90</LINE></L_LETTER>
+  <M_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>91</LINE></M_LETTER>
+  <N_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>92</LINE></N_LETTER>
+  <O_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>93</LINE></O_LETTER>
+  <P_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>94</LINE></P_LETTER>
+  <Q_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>95</LINE></Q_LETTER>
+  <R_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>96</LINE></R_LETTER>
+  <S_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>97</LINE></S_LETTER>
+  <T_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>98</LINE></T_LETTER>
+  <U_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>99</LINE></U_LETTER>
+  <V_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>100</LINE></V_LETTER>
+  <W_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>101</LINE></W_LETTER>
+  <X_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>102</LINE></X_LETTER>
+  <Y_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>103</LINE></Y_LETTER>
+  <Z_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>104</LINE></Z_LETTER>
+  <testing_msg><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>109</LINE></testing_msg>
+  <main><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>130</LINE></main>
+  <ICP1_INTERRUPT><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>521</LINE></ICP1_INTERRUPT>
+  <URXC_INT_HANDLER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>539</LINE></URXC_INT_HANDLER>
+  <ST_MSG_TO_RAM><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>241</LINE></ST_MSG_TO_RAM>
+  <BLUETOOTH_TO_RAM><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>342</LINE></BLUETOOTH_TO_RAM>
+  <CONFIG_TIMER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>410</LINE></CONFIG_TIMER>
+  <here><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>150</LINE></here>
+  <PRINT_COL><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>160</LINE></PRINT_COL>
+  <PRINT_LETTER><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>178</LINE></PRINT_LETTER>
+  <DELAY_DOT_SPACE><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>310</LINE></DELAY_DOT_SPACE>
+  <PRINT_MSG><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>217</LINE></PRINT_MSG>
+  <PRINT_MSG_LOOP><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>221</LINE></PRINT_MSG_LOOP>
+  <PRINT_MSG_END><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>234</LINE></PRINT_MSG_END>
+  <ST_MSG_TO_RAM_LOOP><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>249</LINE></ST_MSG_TO_RAM_LOOP>
+  <ST_MSG_TO_RAM_END><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>256</LINE></ST_MSG_TO_RAM_END>
+  <DELAY_1_GRADE><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>266</LINE></DELAY_1_GRADE>
+  <DELAY_500_MS><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>284</LINE></DELAY_500_MS>
+  <LOOP_DELAY_500_MS><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>292</LINE></LOOP_DELAY_500_MS>
+  <LOOP_DOT_SPACE><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>313</LINE></LOOP_DOT_SPACE>
+  <DELAY_INITIAL_POSITION><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>324</LINE></DELAY_INITIAL_POSITION>
+  <loop><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>327</LINE></loop>
+  <Set_ports><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>381</LINE></Set_ports>
+  <set_usart><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>362</LINE></set_usart>
+  <prender_bluetooth><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>388</LINE></prender_bluetooth>
+  <reset_RAM><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>398</LINE></reset_RAM>
+  <MEASURE_PERIOD><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>459</LINE></MEASURE_PERIOD>
+  <MEASURE_PERIOD_L1><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>464</LINE></MEASURE_PERIOD_L1>
+  <MEASURE_PERIOD_L2><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>475</LINE></MEASURE_PERIOD_L2>
+  <SET_TIME_PER_GRADE><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>500</LINE></SET_TIME_PER_GRADE>
+  <END_BLUETOOTH_MSG><FILE>C:\Users\Crist\Google Drive\Fiuba\Laboratorio de micros\New Tp 2018\repo\Labo-de-micros-2do-2018\main\main.asm</FILE><LINE>562</LINE></END_BLUETOOTH_MSG>
  </LABELS>
 </ASSEMBLER_INFO>
